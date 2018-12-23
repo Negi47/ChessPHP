@@ -99,10 +99,11 @@
 
                 <div class="stepsContainer" >
                     <h5>User 1</h5>
-
-                    <ul class="steps" id="stepsshow">
-                    </ul>
-                    <!-- .steps -->
+                    <table>
+                        <ul class="steps" id="stepsshow">
+                    
+                        </ul>
+                    </table>    
 
                     <h5>User 2</h5>
                 </div>

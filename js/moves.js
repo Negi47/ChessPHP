@@ -31,12 +31,6 @@ function display() {
 	xhttp.onreadystatechange = function() {
 	
 		if (this.readyState == 4 && this.status == 200) {
-			// steps.replace(steps, this.responseText);
-			// var data = JSON.parse(this.responseText);
-			// data.forEach(dragFrom => {
-			// 	steps.appendChild = "<li>" + dragFrom.dragfrom + "</li>";
-			// 	// console.log(dragFrom.dragfrom);
-			// });
 			steps.innerHTML = this.responseText;
 			var temp = this.responseText;
 			var from = temp.slice(4,8);

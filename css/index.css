@@ -36,15 +36,21 @@
     vertical-align:middle;
 }
 
-.id {
-    float: right;
+/* .steps {
     overflow-y: scroll;
     padding: 0 px;
-    /* margin-bottom: auto; */
-    width: 200px;
     max-height: 200px;
-    margin-right: 300px;
-    border: 1px solid black;
+} */
+.box {
+    position: relative;
+}
+
+#r8c1:before {
+    content: 'H';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -20px;
 }
 
 .stepsbox {

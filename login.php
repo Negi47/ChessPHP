@@ -1,5 +1,7 @@
 <?php include "includes/header.php" ?>
 
+<div class="bg-img"></div>
+
 <div class="login">
     <div class="divloginleft">
         <form action="" class="loginform">
