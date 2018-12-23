@@ -1,0 +1,68 @@
+/* chessboard css */
+.white > img,
+.black > img {
+    height: inherit;
+    width: inherit;
+}
+
+.chessboard {
+    width: 548px;
+    height: 548px;
+    margin: 10px;
+    border: 3px solid #333;
+    float: left;
+}
+.black {
+    float: left;
+    width: 67.75px;
+    height: 67.75px;
+    background-color: #999;
+    /**  font-size:50px; /**working 
+     background-color: #331f1c; **/
+    text-align:center;
+    display: table-cell;
+    vertical-align:middle;
+    background-color: grey !important;
+}
+.white {
+    float: left;
+    width:67.75px;
+    height: 67.75px;
+    background-color: #fff; /**working **/
+    /**background-color: #d89b5b;
+    /**font-size:50px;**/
+    text-align:center;
+    display: table-cell;
+    vertical-align:middle;
+}
+
+.id {
+    float: right;
+    overflow-y: scroll;
+    padding: 0 px;
+    /* margin-bottom: auto; */
+    width: 200px;
+    max-height: 200px;
+    margin-right: 300px;
+    border: 1px solid black;
+}
+
+.stepsbox {
+    margin: auto;
+    width: 250px;
+    margin: auto 0 auto 10px;
+}
+.stepsContainer {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    border-top: 1px solid green;
+    border-bottom: 1px solid green;
+}
+.gametime {
+    font-size: 30px;
+    border: 1px solid grey;
+}
+.steps {
+    height: 150px;
+    overflow-y: scroll;
+}
