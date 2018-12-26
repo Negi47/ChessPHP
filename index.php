@@ -23,7 +23,7 @@
             <div class="black box" id="r7c5"><img id="b-p5" class="black-piece" src="Images/b-pawn.png"></div>
             <div class="white box" id="r7c6"><img id="b-p6" class="black-piece" src="Images/b-pawn.png"></div>
             <div class="black box" id="r7c7"><img id="b-p7" class="black-piece" src="Images/b-pawn.png"></div>
-            <div class="white box" id="r7c8"><img id="b-p8" class="black-piece" src="Images/b-bishop.png"></div>
+            <div class="white box" id="r7c8"><img id="b-p8" class="black-piece" src="Images/b-pawn.png"></div>
 
             <!-- 3rd row !-->
             <div class="white box" id="r6c1"></div>
@@ -98,14 +98,20 @@
                 </div>
 
                 <div class="stepsContainer" >
-                    <h5>User 1</h5>
-                    <table>
-                        <ul class="steps" id="stepsshow">
-                    
-                        </ul>
-                    </table>    
+                    <h5 style="position: absolute; top:0;">User 1</h5>
 
-                    <h5>User 2</h5>
+                    <div class="steps" id="stepsshow">
+                    <table>
+                        <tr>
+                            <th>Drag From</th>
+                            <th>Drop To</th>
+                        </tr>
+                    </table>
+                    <table id="stepstable">
+                    </table>    
+                    </div>
+
+                    <h5 style="position: absolute; bottom:0;">User 2</h5>
                 </div>
 
 

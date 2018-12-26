@@ -1,7 +1,8 @@
 <?php 
 require "dataconnect.php";
 $dragfrom = $_POST['drag_from'];
-$insert_data = "insert into moves(dragfrom) values('". $dragfrom . "')";
+$dropto = $_POST['drop_to'];
+$insert_data = "insert into moves(dragfrom,dropto) values('$dragfrom','$dropto')";
 $con->query($insert_data);
 echo "inserted " . $dragfrom;
 ?>

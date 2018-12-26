@@ -17,7 +17,7 @@
     width: 67.75px;
     height: 67.75px;
     background-color: #999;
-    /**  font-size:50px; /**working 
+    /**  font-size:61px; /**working 
      background-color: #331f1c; **/
     text-align:center;
     display: table-cell;
@@ -28,31 +28,158 @@
     float: left;
     width:67.75px;
     height: 67.75px;
-    background-color: #fff; /**working **/
-    /**background-color: #d89b5b;
-    /**font-size:50px;**/
+    background-color: #fff; 
     text-align:center;
     display: table-cell;
     vertical-align:middle;
 }
-
-/* .steps {
-    overflow-y: scroll;
-    padding: 0 px;
-    max-height: 200px;
-} */
 .box {
     position: relative;
 }
-
 #r8c1:before {
-    content: 'H';
+    content: 'R8';
     position: absolute;
+    font-weight: 650;
+    color: grey;
     top: 50%;
     transform: translateY(-50%);
-    left: -20px;
+    left: -30px;
 }
-
+#r7c1:before {
+    content: 'R7';
+    position: absolute;
+    font-weight: 650;
+    color: grey;
+    top: 100%;
+    transform: translateY(-200%);
+    left: -30px;
+}
+#r6c1:before {
+    content: 'R6';
+    position: absolute;
+    top: 100%;
+    font-weight: 650;
+    color: grey;
+    transform: translateY(-200%);
+    left: -30px;
+}
+#r5c1:before {
+    content: 'R5';
+    font-weight: 650;
+    color: grey;
+    position: absolute;
+    top: 100%;
+    transform: translateY(-200%);
+    left: -30px;
+}
+#r4c1:before {
+    content: 'R4';
+    font-weight: 650;
+    color: grey;
+    position: absolute;
+    top: 100%;
+    transform: translateY(-200%);
+    left: -30px;
+}
+#r3c1:before {
+    content: 'R3';
+    position: absolute;
+    top: 100%;
+    font-weight: 650;
+    color: grey;
+    transform: translateY(-200%);
+    left: -30px;
+}
+#r2c1:before {
+    content: 'R2';
+    position: absolute;
+    top: 100%;
+    font-weight: 650;
+    color: grey;
+    transform: translateY(-200%);
+    left: -30px;
+}
+#r1c1:before {
+    content: 'R1';
+    position: absolute;
+    top: 100%;
+    font-weight: 650;
+    color: grey;
+    transform: translateY(-200%);
+    left: -30px;
+}
+#r1c1::after {
+    content: 'C1';
+    position: absolute;
+    top: 110%;
+    font-weight: 650;
+    color: grey;
+    transform: translateX(-200%);
+    left: 61px;
+}
+#r1c2::after {
+    content: 'C2';
+    position: absolute;
+    top: 110%;
+    font-weight: 650;
+    color: grey;
+    transform: translateX(-200%);
+    left: 61px;
+}
+#r1c3::after {
+    content: 'C3';
+    position: absolute;
+    top: 110%;
+    font-weight: 650;
+    color: grey;
+    transform: translateX(-200%);
+    left: 61px;
+}
+#r1c4::after {
+    content: 'C4';
+    position: absolute;
+    top: 110%;
+    font-weight: 650;
+    color: grey;
+    transform: translateX(-200%);
+    left: 61px;
+}
+#r1c5::after {
+    content: 'C5';
+    position: absolute;
+    top: 110%;
+    font-weight: 650;
+    color: grey;
+    transform: translateX(-200%);
+    left: 61px;
+}
+#r1c6::after {
+    content: 'C6';
+    position: absolute;
+    top: 110%;
+    font-weight: 650;
+    color: grey;
+    transform: translateX(-200%);
+    left: 61px;
+}
+#r1c7::after {
+    content: 'C7';
+    position: absolute;
+    top: 110%;
+    font-weight: 650;
+    color: grey;
+    transform: translateX(-200%);
+    left: 61px;
+}
+#r1c8::after {
+    content: 'C8';
+    position: absolute;
+    top: 110%;
+    font-weight: 650;
+    color: grey;
+    transform: translateX(-200%);
+    left: 61px;
+}
 .stepsbox {
     margin: auto;
     width: 250px;
@@ -63,12 +190,19 @@
     border-right: 1px solid grey;
     border-top: 1px solid green;
     border-bottom: 1px solid green;
+    height: 280px;
+    /* overflow-y: scroll; */
+    position: relative;
 }
 .gametime {
     font-size: 30px;
     border: 1px solid grey;
 }
 .steps {
-    height: 150px;
+    height: 190px;
     overflow-y: scroll;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: 100%;
 }

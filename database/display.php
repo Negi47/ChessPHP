@@ -7,13 +7,16 @@ $rslt = $con->query($show_moves);
 		while ($row=$rslt->fetch_assoc()) {
             // printf("%s \n",$ob['modelno']);
             // $data[] = $row;
-            echo "<table>";
+            // echo "<table>";
             echo "<tr>";
             echo "<td>";
             echo "" . $row['dragfrom'];
             echo "  </td>";
+            echo "<td>";
+            echo "" . $row['dropto'];
+            echo "  </td>";
             echo "</tr>";
-            echo "</table>";
+            // echo "</table>";
     }
     
     // echo json_encode($data);
