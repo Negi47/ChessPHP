@@ -76,7 +76,7 @@ function pawnMove(pos)
 	var moves=[];
 	i=row;
 	j=0;
-	console.log("new state: "+document.getElementById(pos).childNodes[0].className)
+	console.log(document.getElementById(pos).childNodes[0].className)
 	if(document.getElementById(pos).childNodes[0].className=="white-piece")
 	{	id="r"+(++i)+"c"+column;
 		if(!document.getElementById(id).hasChildNodes())
@@ -89,14 +89,14 @@ function pawnMove(pos)
 		row++;
 		id="r"+(row)+"c"+(++column);
 		console.log(id)
-		if(document.getElementById(id).hasChildNodes())
+		if(column<=8 && document.getElementById(id).hasChildNodes())
 		{	if(document.getElementById(id).childNodes[0].className=="black-piece")
 			{	moves[j++]=id;
 			}
 		}
 		column--
 		id="r"+(row)+"c"+(--column);
-		if(document.getElementById(id).hasChildNodes() && document.getElementById(id).childNodes[0].className=="black-piece")
+		if(column>=1 && document.getElementById(id).hasChildNodes() && document.getElementById(id).childNodes[0].className=="black-piece")
 			moves[j++]=id;
 
 	}
