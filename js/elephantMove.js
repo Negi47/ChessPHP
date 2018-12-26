@@ -1,6 +1,5 @@
 function elephantMove(pos)
-{	
-    var values=pos.split('');
+{	var values=pos.split('');
 	var row=values[1];
 	var column=values[3];
 	var moves=[];
@@ -15,6 +14,10 @@ function elephantMove(pos)
 		}	
 		else
 		{	moves[j++]=id;
+			if(document.getElementById(id).hasChildNodes())
+			{
+				break;
+			}	
 		}	
 	}
 	i=row
@@ -26,8 +29,100 @@ function elephantMove(pos)
 		}	
 		else
 		{	moves[j++]=id;
+			if(document.getElementById(id).hasChildNodes())
+			{
+				break;
+			}
+		}	
+	}
+	i=column
+	while(i<8)
+	{	id="r"+row+"c"+(++i);
+		if(document.getElementById(id).hasChildNodes() && (document.getElementById(pos).childNodes[0].className==document.getElementById(id).childNodes[0].className))
+		{	
+			break
+		}	
+		else
+		{	
+			moves[j++]=id;
+			if(document.getElementById(id).hasChildNodes())
+			{
+				break;
+			}
+		}	
+	}
+	i=column
+	while(i>1)
+	{	id="r"+row+"c"+(--i);
+		if(document.getElementById(id).hasChildNodes() && (document.getElementById(pos).childNodes[0].className==document.getElementById(id).childNodes[0].className))
+		{
+			break
+		}	
+		else
+		{	moves[j++]=id;
+			if(document.getElementById(id).hasChildNodes())
+			{
+				break;
+			}
 		}	
 	}
 	console.log(moves);
 	return moves
+}
+function pawnMove(pos)
+{	var values=pos.split('');
+	var row=values[1];
+	var column=values[3];
+	var moves=[];
+	i=row;
+	j=0;
+	console.log("new state: "+document.getElementById(pos).childNodes[0].className)
+	if(document.getElementById(pos).childNodes[0].className=="white-piece")
+	{	id="r"+(++i)+"c"+column;
+		if(!document.getElementById(id).hasChildNodes())
+			moves[j++]=id;
+		if(row=='2')
+		{	id="r"+(++i)+"c"+column;
+			if(!document.getElementById(id).hasChildNodes())
+				moves[j++]=id
+		}
+		row++;
+		id="r"+(row)+"c"+(++column);
+		console.log(id)
+		if(document.getElementById(id).hasChildNodes())
+		{	if(document.getElementById(id).childNodes[0].className=="black-piece")
+			{	moves[j++]=id;
+			}
+		}
+		column--
+		id="r"+(row)+"c"+(--column);
+		if(document.getElementById(id).hasChildNodes() && document.getElementById(id).childNodes[0].className=="black-piece")
+			moves[j++]=id;
+
+	}
+	i=row
+	if(document.getElementById(pos).childNodes[0].className=="black-piece")
+	{	id="r"+(--i)+"c"+column;
+		if(!document.getElementById(id).hasChildNodes())
+			moves[j++]=id;
+		if(row=='7')
+		{	id="r"+(--i)+"c"+column;
+			if(!document.getElementById(id).hasChildNodes())
+				moves[j++]=id
+		}
+		row--;
+		id="r"+(row)+"c"+(++column);
+		console.log(id)
+		if(document.getElementById(id).hasChildNodes())
+		{	if(document.getElementById(id).childNodes[0].className=="white-piece")
+			{	moves[j++]=id;
+			}
+		}
+		column--
+		id="r"+(row)+"c"+(--column);
+		if(document.getElementById(id).hasChildNodes() && document.getElementById(id).childNodes[0].className=="white-piece")
+			moves[j++]=id;
+	}	
+	return moves;
+
 }
