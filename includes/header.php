@@ -1,4 +1,6 @@
-<?php include "./database/dataconnect.php" ?>
+<?php 
+session_start();
+include "./database/dataconnect.php" ?>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +14,9 @@
 
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/signup.css">
     <link rel="stylesheet" href="css/index.css">
+
 </head>
 <body>
 
@@ -21,7 +25,22 @@
             <a href="#" class="brand-logo">TACTICAL</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="badges.html">About</a></li>
+            
+            <?php if (!isset($_SESSION['username'])): ?>
+
             <li><a href="collapsible.html">Sign In</a></li>
+
+            <?php else: ?>
+
+            <li>
+                <a class='dropdown-trigger btn' href='#' data-target='dropdown1'> <?= $_SESSION['username'] ?> </a>
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="profile.php">Profile</a></li>
+                    <li><a href="#!">two</a></li>
+                </ul>    
+            </li>
+
+            <?php endif; ?>
             </ul>
         </div>
     </nav>

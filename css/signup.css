@@ -1,0 +1,63 @@
+.bg-img{
+    background-color: #eeeeee; 
+    /* position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../Images/board-background.png");
+    z-index: -1; */
+}
+.signup {
+    display: flex;
+    margin: 5% auto auto 29%;
+    max-height: 10%; 
+    background: transparent;
+    width: 70%;
+}
+.divsignupleft{
+    width: 43%;
+    float: left;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1.8em;
+    box-shadow: 0 1px 4px rgba(0,0,0,.15);
+    border: 1px solid rgb(226, 226, 226);
+}
+
+.signup_text{
+    font-weight: 560;
+    margin-bottom: 1rem;
+    font-size: 14px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #707070;
+}
+.signupform > input[type=text]{
+    border: 0.8px solid #707070;
+    border-radius: 4px 4px 4px 4px;
+    box-sizing: border-box;
+    height: 40px;
+}
+.signupform > input[type=text], .signupform > .log_text {
+    color: #707070;
+    align-content: center;
+    font-family: sans-serif;
+}
+hr{
+    width: 99%;
+}
+form{
+    box-sizing: border-box;
+}
+.signup_btn {
+    float: right;
+    color: #4c4747;
+}
+.register_btn {
+    color: #3893e8;
+}
+button.btn{
+    background-color: gainsboro;
+    font-weight: 500;
+}
+button.btn:hover {
+    background-color: gainsboro;
+}

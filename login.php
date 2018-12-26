@@ -4,7 +4,7 @@
 
 <div class="login">
     <div class="divloginleft">
-        <form action="" class="loginform" >
+        <form action="" method ="POST" class="loginform" >
             <p class="log_text2">Sign In</p>
 
             <label class="log_text">Username or email</label>
@@ -25,6 +25,8 @@
 
 </div>
 
+<div id="show_error">
+</div>
 
 <?php include "includes/footer.php"?>
 
