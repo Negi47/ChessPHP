@@ -5,6 +5,7 @@ var black=16,white=16 ;
 var validMoves=[];
 var dragfrom, dropto, dragele;
 var  whitetimeout, blacktimeout;
+// var from,to,piece_id;
 // var timeleft = 2*60;
 
 //AJAX CODE FOR DISPLAY THE MOVES ONTO THE SAME PAGE
@@ -15,17 +16,25 @@ function forward() {
 	xhttp.onreadystatechange = function() {
 	
 		if (this.readyState == 4 && this.status == 200) {
-			// steps.innerHTML = this.responseText;
+			
 			var temp = this.responseText;
 			console.log("Data coming: "+temp)	
 			var from = temp.slice(0,4);
 			var to = temp.slice(4,8);
 			console.log("from : " + from + " to : " + to);
-			// document.getElementById(to).style.
-			// document.getElementById(from).getElementsByTagName('img').src ="b-pawn.png"; 
-			// var to_img = document.getElementById(to).getElementsByTagName('img');
+			
+			var to_img = document.getElementById(to);
+			var from_img = document.getElementById(from);
+			var piece_id = document.getElementById(to_img.childNodes[0].id)
+		
+			console.log("to_img:" +to_img);
+			console.log(from_img);
+			console.log(piece_id);
+			
+			piece_id.remove(piece_id);
+			from_img.appendChild(piece_id);
 
-			goback(from, to);
+			console.log("delet: "+piece_id);
 
 			// /console.log(from_img);
 			//document.getElementById(to).style.background = "blue";
@@ -161,7 +170,11 @@ function drag(ev) {
 	if(ev.target.id.includes("w-p")||ev.target.id.includes("b-p"))
     {	
 		validMoves=pawnMove(ev.target.parentNode.id)
-    }	
+	}
+	else if (ev.target.id.includes("w-k")||ev.target.id.includes("b-k"))
+    {
+    	validMoves=kingMoves(ev.target.parentNode.id)
+    }		
     else
     {
     	validMoves=elephantMove(ev.target.parentNode.id)
