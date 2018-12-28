@@ -1,8 +1,13 @@
 <?php 
+session_start();
 require "dataconnect.php";
 $dragfrom = $_POST['drag_from'];
 $dropto = $_POST['drop_to'];
-$insert_data = "insert into moves(dragfrom,dropto) values('$dragfrom','$dropto')";
-$con->query($insert_data);
-echo "inserted " . $dragfrom;
+$dragele = $_POST['drag_ele'];
+$uid = $_SESSION['uid'];
+
+// $insert_data = "insert into moves(uid) values('$uid')";
+$insert_data = "insert into moves(uid,dragfrom,dropto,dragele) values('$uid','$dragfrom','$dropto','$dragele')";
+if ($con->query($insert_data) == false)
+    echo "error in insert" . $con->error;
 ?>

@@ -1,6 +1,6 @@
 
 
-<h1>footer</h1>
+
     
     <script type="text/javascript" src="js/moves.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -11,8 +11,13 @@
 
     <script>
         $(document).ready(function() {
-            $('.dropdown-trigger').dropdown();
+            // $('.dropdown-trigger').dropdown();
             $('.tabs').tabs();
+
+            $(".usertrigger").click(function(){
+                var menu = $(this).attr("data-target");
+                $("#"+menu).toggleClass("closed");
+            });
         });
     </script>
     

@@ -190,10 +190,21 @@
     border-right: 1px solid grey;
     border-top: 1px solid green;
     border-bottom: 1px solid green;
-    height: 280px;
     /* overflow-y: scroll; */
     position: relative;
 }
+
+.stepsControlBtns {
+    display: flex;
+    justify-content: center;
+}
+
+.startgamebtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 .gametime {
     font-size: 30px;
     border: 1px solid grey;
@@ -201,14 +212,12 @@
 .steps {
     height: 190px;
     overflow-y: scroll;
-    top: 50%;
-    transform: translateY(-50%);
-    position: absolute;
     width: 100%;
 }
 .game_sec {
     display: flex;
     padding-top: 10px;
+    position: relative;
 }
 
 .left_sec {

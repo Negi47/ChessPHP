@@ -14,9 +14,15 @@
 
     <script>
         $(document).ready(function() {
-            $('.dropdown-trigger').dropdown();
-            $('.tabs').tabs();
+            // $('.dropdown-trigger').dropdown();
+            // $('.tabs').tabs();
+            
+            $(".dropdown-trigger").click(function(){
+                var menu = $(this).attr("data-target");
+                $("#"+menu).toggleClass("closed");
+            });
         });
+
     </script>
     
 </body>

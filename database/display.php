@@ -1,6 +1,8 @@
 <?php
+session_start();
 require "dataconnect.php";
-$show_moves = "select *from moves ORDER BY id DESC";
+$uid = $_SESSION['uid'];
+$show_moves = "select *from moves where uid=" . $uid . " ORDER BY id DESC";
 $rslt = $con->query($show_moves);
     if($rslt->num_rows > 0)
     {
@@ -14,6 +16,9 @@ $rslt = $con->query($show_moves);
             echo "  </td>";
             echo "<td>";
             echo "" . $row['dropto'];
+            echo "  </td>";
+            echo "<td>";
+            echo "" . $row['dragele'];
             echo "  </td>";
             echo "</tr>";
             // echo "</table>";

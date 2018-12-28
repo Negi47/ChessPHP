@@ -20,7 +20,9 @@
     
     <div class="divloginright">
         <p>New to Game</p>
+        <a href="signup.php">
         <button type="submit" class="btn register_btn"><i class="material-icons left">input</i> Register </button>
+        </a>
     </div>
 
 </div>
@@ -28,6 +30,6 @@
 <div id="show_error">
 </div>
 
-<?php include "includes/footer.php"?>
+<?php include "includes/foot.php"?>
 
 

@@ -1,6 +1,8 @@
 <?php include "includes/header.php" ?>
-    
-    <div class="game_sec">
+
+
+<div class="game_sec">
+        <button class="startgamebtn btn" onclick="timeout(30, 0)"> Start Game</button>
     
         <div class="left_sec">
         
@@ -94,29 +96,45 @@
 
             <div class="stepsbox">
                 <div class="timer">
-                    <span class="gametime">2:00</span>
+                    <span class="gametime" id="whitetime">2:00</span>   
                 </div>
 
                 <div class="stepsContainer" >
-                    <h5 style="position: absolute; top:0;">User 1</h5>
+                    <h5>User 1</h5>
+
+                    <div class="stepsControlBtns">
+                    <button type="button" value="forward" onclick="return forward()">
+                            <i class="material-icons">skip_next</i>
+                        </button>
+                        <!-- <button>
+                            <i class="material-icons">skip_previous</i>
+                        </button>
+                        <button>
+                            <i class="material-icons">fast_forward</i>
+                        </button>
+                        <button>
+                            <i class="material-icons">fast_rewind</i>
+                        </button> -->
+                    </div>
 
                     <div class="steps" id="stepsshow">
                     <table>
                         <tr>
                             <th>Drag From</th>
                             <th>Drop To</th>
+                            <th>Drag Ele</th>
                         </tr>
                     </table>
                     <table id="stepstable">
                     </table>    
                     </div>
 
-                    <h5 style="position: absolute; bottom:0;">User 2</h5>
+                    <h5>User 2</h5>
                 </div>
 
 
                 <div class="timer">
-                    <span class="gametime">2:00</span>
+                    <span class="gametime" id="blacktime">2:00</span>
                 </div>
             </div>
             <!-- .stepsbox -->

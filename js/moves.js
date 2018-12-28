@@ -4,9 +4,38 @@ var node;
 var black=16,white=16 ;
 var validMoves=[];
 var dragfrom, dropto, dragele;
+var  whitetimeout, blacktimeout;
+// var timeleft = 2*60;
 
 //AJAX CODE FOR DISPLAY THE MOVES ONTO THE SAME PAGE
 var xhttp = new XMLHttpRequest();
+
+function forward() {
+	console.log("foward moving");	
+	xhttp.onreadystatechange = function() {
+	
+		if (this.readyState == 4 && this.status == 200) {
+			// steps.innerHTML = this.responseText;
+			var temp = this.responseText;
+			console.log("Data coming: "+temp)	
+			var from = temp.slice(0,4);
+			var to = temp.slice(4,8);
+			console.log("from : " + from + " to : " + to);
+			// document.getElementById(to).style.
+			// document.getElementById(from).getElementsByTagName('img').src ="b-pawn.png"; 
+			// var to_img = document.getElementById(to).getElementsByTagName('img');
+
+			goback(from, to);
+
+			// /console.log(from_img);
+			//document.getElementById(to).style.background = "blue";
+		}
+	  };
+	xhttp.open("GET", "./database/forward.php", true);
+	xhttp.send();
+	return false;
+}
+
 
 function send(dragfrom,dropto) {
 	xhttp.onreadystatechange = function() {
@@ -19,7 +48,7 @@ function send(dragfrom,dropto) {
 	};
 	xhttp.open("POST", "./database/storemoves.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("drag_from="+dragfrom+"&drop_to="+dropto);
+	xhttp.send("drag_from="+dragfrom+"&drop_to="+dropto+"&drag_ele="+dragele);
 
 	setTimeout(function(){ display(); }, 200);
 	
@@ -34,10 +63,10 @@ function display() {
 	
 		if (this.readyState == 4 && this.status == 200) {
 			steps.innerHTML = this.responseText;
-			var temp = this.responseText;
-			var from = temp.slice(4,8);
-			var to = temp.slice(16,20);
-			console.log("from : " + from + " to : " + to);
+			// var temp = this.responseText;
+			// var from = temp.slice(4,8);
+			// var to = temp.slice(16,20);
+			// console.log("from : " + from + " to : " + to);
 			// document.getElementById(from).style.background = "red";
 			// document.getElementById(to).style.background = "blue";
 		}
@@ -47,13 +76,54 @@ function display() {
 }
 //END OF AJAX
 
-//SETTING ATTRIBUTE 64 BOX
+//FUNCTION FOR REFRESHING THE PAGE
+// function indexrefresh() {
+// 	if(confirm("If you refresh of leave this page you will lose the game"))
+// 		window.location.replace("login.php");
+// }
 
+// function timeout(timeleft, flag)
+// {
+//     var minute=Math.floor(timeleft/60);
+// 	var second=timeleft%60;
+// 	// var flag = 0;
+
+//     if(flag == 0)
+//     {
+//         // clearTimeout(timeout);
+// 		document.getElementById('whitetime').innerHTML= minute+":"+second;
+// 		console.log(minute + ":" + second);
+// 		setTimeout(function() {
+// 			if (timeleft > 0) {
+// 				console.log("inside settimout " + minute + ":" + second);
+// 				timeout(--timeleft, 0);
+// 			}
+// 			else
+// 				timeout(30, 1);
+// 		}, 1000);
+//     }
+//     else
+//     {
+//         document.getElementById('blacktime').innerHTML= minute+":"+second;
+// 		var blacktimeout = setTimeout(function() {
+// 			if (timeleft > 0) {
+// 				timeout(--timeleft, 1);
+// 			}
+// 			else
+// 				timeout(30, 0);
+// 		}, 1000);
+//     }
+//     // timeleft--;
+// }
+
+
+//SETTING ATTRIBUTE 64 BOX
 console.log('working');
 for (var i=0; i<64; i++) {
 
 	document.getElementsByClassName('box')[i].setAttribute("ondragover", "allowDrop(event)");
 	document.getElementsByClassName('box')[i].setAttribute("ondrop","drop(event)");
+	
 	if(i<16)
 	{	document.getElementsByClassName('black-piece')[i].setAttribute("ondragstart","drag(event)");
 		document.getElementsByClassName('black-piece')[i].setAttribute("draggable","true");
@@ -69,6 +139,15 @@ function allowDrop(ev) {
     var node = ev.target.id;
 }
 
+
+// function goback(pre_dragfrom, pre_dropto) {
+
+// 	document.getElementById(pre_dragfrom).style.color = "red !important";
+// 	document.getElementById(pre_dropto).style.color = "blue !important";
+
+// }
+
+
 function drag(ev) {
 	console.log("dragged from : " + ev.target.parentNode.id);
 	drag_from = ev.target.parentNode.id;	
@@ -77,6 +156,7 @@ function drag(ev) {
 	ev.dataTransfer.setData("text", ev.target.id);  
 	console.log("dragged element : " + ev.target.id);
 	drag_ele = ev.target.id;
+	dragele = drag_ele;
 	dragfrom = drag_from;
 	if(ev.target.id.includes("w-p")||ev.target.id.includes("b-p"))
     {	
@@ -86,8 +166,28 @@ function drag(ev) {
     {
     	validMoves=elephantMove(ev.target.parentNode.id)
     }	
-    console.log(validMoves)
+	console.log(validMoves)
 }
+
+// function timer() {
+// 	console.log("timer working")
+// 	var minute=Math.floor(timeleft/60);
+//     var second=timeleft%60;
+//     if(timeleft<=0)
+//     {
+//         clearTimeout(whitetimeout);
+//         document.getElementById('timer').innerHTML= response.Text;
+//     }
+//     else
+//     {
+// 		clearTimeout(blacktimeout)
+// 		document.getElementById('timer').innerHTML= minute+":"+second;
+//     }
+//     timeleft--;
+//     setTimeout(function() {
+//         timeout()
+//     }, 1000);
+// }
 
 function drop(ev) {
 
@@ -133,8 +233,12 @@ function drop(ev) {
 		
 		dropto = drop_to;
 
-		send(dragfrom,dropto);
+		send(dragfrom,dropto,dragele);
+		// forward();
 		random_move();
+		// timeout(30, 1);
+	
+
 	}
 	else
 	{

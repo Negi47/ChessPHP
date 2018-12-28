@@ -24,23 +24,34 @@ include "./database/dataconnect.php" ?>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">TACTICAL</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="badges.html">About</a></li>
-            
-            <?php if (!isset($_SESSION['username'])): ?>
+                <li><a href="badges.html">About</a></li>
+                
+                <?php if (!isset($_SESSION['username'])): ?>
 
-            <li><a href="collapsible.html">Sign In</a></li>
+                <li><a href="signup.php">Sign In</a></li>
 
-            <?php else: ?>
+                <?php else: ?>
 
-            <li>
-                <a class='dropdown-trigger btn' href='#' data-target='dropdown1'> <?= $_SESSION['username'] ?> </a>
-                <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="profile.php">Profile</a></li>
-                    <li><a href="#!">two</a></li>
-                </ul>    
-            </li>
+                <li style="height: 64px;" class="valign-wrapper">
+                    <div class="usertrigger" data-target='userprofilemenu'>
+                        <img src="Images/board-background.png" alt="">
+                    </div>
+                </li>
 
-            <?php endif; ?>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>
+
+    <ul id='userprofilemenu' class='dropdown closed'>
+        <?php if(isset($_SESSION['username'])): ?>
+            <li><a href="profile.php"> <?= $_SESSION['username'] ?> </a></li>
+            <li><a href="logout.php">Logout</a></li>                        
+        <?php else: ?>
+            <li><a href="login.php">Login</a></li>
+            <li><a href="signup.php">Signup</a></li>
+        <?php endif; ?>
+
+
+
+    </ul> 

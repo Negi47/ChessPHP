@@ -2,4 +2,33 @@
     background-color: black;
 }
 
+.dropdown {
+    position: absolute;
+    z-index: 2;
+    top: 50px;
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid red;
+}
+.dropdown li a {
+    padding: 0.3em 1em;
+    color: black;
+    display: block;
+}
+
+.usertrigger {
+    height: 38px;
+    width: 38px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+.usertrigger > img {
+    height: inherit;
+    width: auto;
+}
+
+.closed {
+    display: none;
+}
+
 /* body css */

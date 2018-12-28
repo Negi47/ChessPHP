@@ -5,9 +5,15 @@
 <div class="signup">
     <div class="divsignupleft">
         <form action="" method ="POST" class="signupform" >
-            <p class="log_text2">Register 
+
+            <div style="display:flex; justify-content:space-between; margin-bottom: 15px;">
+                <span>Register</span>
                 <button type="submit" class="btn register_btn"><i class="material-icons left">input</i> Register </button>
-            </p>
+            </div>
+
+            <!-- <p class="log_text2">Register 
+                <button type="submit" class="btn register_btn"><i class="material-icons left">input</i> Register </button>
+            </p> -->
 
             <label class="signup_text">Username</label>
             <input type="text" name="username" id="user">

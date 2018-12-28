@@ -1,0 +1,10 @@
+.homeContainer {
+    /* background-image: url("../Images/board-background.png"); */
+    height: 100vh;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 300px;
+    margin: auto;
+    /* display: flex; */
+
+}

@@ -19,8 +19,8 @@ require "dataconnect.php";
 		// $_SESSION['username'] = $user['username'];
 		// $_SESSION['uid'] = $user['uid'];
 
-		// $update_data = "update login set active='active' where uid='" . $_SESSION['uid'] . "'";
-		// $update_result = $con->query($update_data);	
+		$update_data = "update login set active='active' where uid='" . $_SESSION['uid'] . "'";
+		$con->query($update_data);	
 
 		
 		echo "true";
