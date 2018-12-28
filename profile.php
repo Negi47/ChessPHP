@@ -50,7 +50,6 @@ while ($row = $rslt->fetch_assoc())
 
 </div>
 
-
 <?php 
 
 require "includes/foot.php";

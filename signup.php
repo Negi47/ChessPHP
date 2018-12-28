@@ -1,4 +1,38 @@
-<?php include "includes/header.php" ?>
+<?php 
+
+include "includes/header.php";
+
+if (isset($_POST['submit'])) {
+
+    $all = "";
+    $userError = "";
+
+    if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+        $all = "please enter all details";
+    }
+    else {
+        $user = $_POST['username'];
+        $pswd = $_POST['password'];	
+        $email = $_POST['email'];
+
+
+        if( (strlen($user) < 5) || (strlen($pswd) < 5) ) {   
+            
+            $userError = "Username and password should be within 4 to 8 characters";
+
+        }
+        else {
+            $insert_data = "insert into login(username,password,email) values('$user','$pswd','$email')";
+    
+            $con->query($insert_data);
+    
+            header("location: login.php");
+        }
+
+
+    }
+}
+?>
 
 <div class="bg-img"></div>
 
@@ -11,20 +45,31 @@
                 <button type="submit" class="btn register_btn"><i class="material-icons left">input</i> Register </button>
             </div>
 
-            <!-- <p class="log_text2">Register 
-                <button type="submit" class="btn register_btn"><i class="material-icons left">input</i> Register </button>
-            </p> -->
+            <?php 
+                // if (isset($all))               {
+                    if (!empty($all)) 
+                        echo "<div>$all</div>";
+
+                    if (!empty($userError)) 
+                        echo "<div>$userError</div>";
+                // }
+                    
+                // else if()
+            ?>
 
             <label class="signup_text">Username</label>
-            <input type="text" name="username" id="user">
+            <p style="margin:0;"><small id="usernameError"></small></p>
+            <input type="text" name="username" id="user" onkeyup="checkUsername()">
 
             <label class="signup_text">password</label>
             <input type="text" name="password" id="pswd">
 
             <label class="signup_text">Email</label>
-            <input type="text" name="emailid" id="email">
+            <p style="margin:0;"><small id="emailError"></small></p>
+            <input type="text" name="email" id="email" onkeyup="checkEmail()">
             <hr>
-            <button type="submit" name="submit" onclick="return signup()" class="btn signup_btn"><i class="material-icons left">input</i>Register</button>
+            <!-- <button type="submit" name="submit" onclick="return signup()" class="btn signup_btn"><i class="material-icons left">input</i>Register</button> -->
+            <button type="submit" name="submit" class="btn signup_btn"><i class="material-icons left">input</i>Register</button>
         </form>
     </div>
 </div>
