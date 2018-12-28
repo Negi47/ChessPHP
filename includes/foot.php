@@ -1,6 +1,6 @@
 
 
-<h1>footer</h1>
+
     
     <!-- <script type="text/javascript" src="js/moves.js"></script> -->
 
@@ -15,11 +15,14 @@
     <script>
         $(document).ready(function() {
             // $('.dropdown-trigger').dropdown();
-            // $('.tabs').tabs();
+            $('.tabs').tabs();
             
-            $(".dropdown-trigger").click(function(){
-                var menu = $(this).attr("data-target");
-                $("#"+menu).toggleClass("closed");
+            $(".usertrigger").click(function(){
+                $("#userprofilemenu").toggleClass("closed");
+            });
+            
+            $(".container").click(function(){
+                $("#userprofilemenu").toggleClass("closed");
             });
         });
 

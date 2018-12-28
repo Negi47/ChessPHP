@@ -7,9 +7,13 @@ $rslt = $con->query($show_moves);
     if($rslt->num_rows > 0)
     {
 		while ($row=$rslt->fetch_assoc()) {
-
-            echo "" . $row['dragfrom'];
             echo "" . $row['dropto'];
-           }
-    } 
+            echo "" . $row['dragele'];
+       }
+    }
+    else
+    {
+        echo $con->error;
+    }
+
 ?>

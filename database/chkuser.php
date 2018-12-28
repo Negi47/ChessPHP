@@ -14,13 +14,15 @@ require "dataconnect.php";
 		while($user = $search_result->fetch_assoc()) {
 			$_SESSION['username'] = $user['username'];
 			$_SESSION['uid'] = $user['uid'];
+			
+			$con->query("update login set lastlogin='" . $user['userlog']. "' where uid='" . $_SESSION['uid'] . "'");
 		}
 
 		// $_SESSION['username'] = $user['username'];
 		// $_SESSION['uid'] = $user['uid'];
 
 		$update_data = "update login set active='active' where uid='" . $_SESSION['uid'] . "'";
-		$con->query($update_data);	
+		$con->query($update_data);
 
 		
 		echo "true";

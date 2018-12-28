@@ -16,13 +16,14 @@ include "./database/dataconnect.php" ?>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/signup.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/profile.css">
 
 </head>
 <body>
 
     <nav class="mynav">
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">TACTICAL</a>
+            <a href="index.php" class="brand-logo">TACTICAL</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="badges.html">About</a></li>
                 
@@ -44,6 +45,7 @@ include "./database/dataconnect.php" ?>
     </nav>
 
     <ul id='userprofilemenu' class='dropdown closed'>
+        <li class="chonch"></li>
         <?php if(isset($_SESSION['username'])): ?>
             <li><a href="profile.php"> <?= $_SESSION['username'] ?> </a></li>
             <li><a href="logout.php">Logout</a></li>                        

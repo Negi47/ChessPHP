@@ -16,6 +16,8 @@ function login(){
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == "true")
                     window.location.replace("index.php");
+                else
+                console.log(this.responseText)
             }
           };
           xhttp.open("POST", "./database/chkuser.php", true);

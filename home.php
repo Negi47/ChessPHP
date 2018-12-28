@@ -9,19 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 
-<body style="background-image:url(Images/board-background.png)" onclick="gotopage()">
+<body style="background-image:url(Images/background.jpg)">
 
-    <div class="homeContainer valign-wrapper">
-        <div style="width:100%" class="center">
-        <img src="Images/b-pawn.png" alt="">
-        </div>
-        <div style="width:100%;">
-        <h5 class="center">Tactical</h5>
-        </div>
+    <div style="position:absolute; height: 100%; width: 100%;" onclick="gotopage()">
+    <h5 class="homeTag">Tactical</h5>
     </div>
 
     <script>
         function gotopage() {
+            console.log("working");
             window.location.replace("login.php");
         }
     </script>

@@ -18,6 +18,10 @@
                 var menu = $(this).attr("data-target");
                 $("#"+menu).toggleClass("closed");
             });
+
+            $(".game_sec").click(function(){
+                $("#userprofilemenu").toggleClass("closed");
+            });
         });
     </script>
     

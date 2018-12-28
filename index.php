@@ -1,10 +1,18 @@
 <?php include "includes/header.php" ?>
 
 
-<div class="game_sec">
-        <button class="startgamebtn btn" onclick="timeout(30, 0)"> Start Game</button>
-    
+<div class="game_sec" >
+        <button class="startgamebtn btn" > Start Game</button>
+
         <div class="left_sec">
+            <h5 style="padding-left: 12%;">Users List</h5>
+            <hr style="border: 1px solid lightgrey;">
+            <ul id="usrdisplay"></ul>
+        
+        </div>
+
+    
+        <div class="mid_sec">
         
         <div class="chessboard">
 
@@ -101,22 +109,16 @@
 
                 <div class="stepsContainer" >
                     <h5>User 1</h5>
-
+                    <hr style="margin:0">
                     <div class="stepsControlBtns">
-                    <button type="button" value="forward" onclick="return forward()">
-                            <i class="material-icons">skip_next</i>
-                        </button>
-                        <!-- <button>
+                        <button type="button" value="backward" onclick="return backward()">
                             <i class="material-icons">skip_previous</i>
                         </button>
-                        <button>
-                            <i class="material-icons">fast_forward</i>
+                        <button type="button" value="forward" onclick="return forward()">
+                            <i class="material-icons">skip_next</i>
                         </button>
-                        <button>
-                            <i class="material-icons">fast_rewind</i>
-                        </button> -->
                     </div>
-
+                    <hr style="margin:0">
                     <div class="steps" id="stepsshow">
                     <table>
                         <tr>

@@ -216,20 +216,33 @@
 }
 .game_sec {
     display: flex;
-    padding-top: 10px;
+    /* padding-top: 10px; */
     position: relative;
 }
-
 .left_sec {
+    width: 20%;
+    /* border: 1px solid red; */
+    box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.14);
+}
+.mid_sec {
     width: 70%;
     display: flex;
     justify-content: flex-end;
+    padding-top: 10px;
 }
-
-
 .right_sec {
     width: 45%; 
     display: flex;
     justify-content: flex-start;
+    padding-top: 10px;
 }
+
+
+.activeLists {
+    display: flex;
+    justify-content: space-between;
+   
+}
+
+
 

@@ -5,14 +5,51 @@ var black=16,white=16 ;
 var validMoves=[];
 var dragfrom, dropto, dragele;
 var  whitetimeout, blacktimeout;
-// var from,to,piece_id;
-// var timeleft = 2*60;
 
 //AJAX CODE FOR DISPLAY THE MOVES ONTO THE SAME PAGE
 var xhttp = new XMLHttpRequest();
 
-function forward() {
-	console.log("foward moving");	
+function active() {
+	var display = document.getElementById('usrdisplay');
+	xhttp.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200){
+			display.innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "./database/useractive.php", true);
+	xhttp.send();
+	return false;
+}
+setInterval(function() {
+	active();
+},1000);
+
+// function shownxtpage() {
+// 	xhttp.onreadystatechange = function() {
+// 		if(this.readyState == 4 && this.status == 200){
+// 			var temp =this.responseText;
+// 			console.log("data from nxt page:" +temp)
+// 			var from_nxt = temp.slice(0,4);
+// 			var to_nxt = temp.slice(4,8);
+
+// 			console.log("from_nxt: "+from_nxt);
+// 			console.log("to_nxt: "+to_nxt);
+
+// 			var from_page = document.getElementById(from_nxt);
+// 			var to_page = document.getElementById(to_nxt);
+// 			var piece_page = document.getElementById(from_page.childNodes[0].id)
+
+			
+// 			to_page.appendChild(piece_page);
+// 		}
+// 	};
+// 	xhttp.open("GET", "./database/datatransfer.php", true);
+// 	xhttp.send();
+// 	setTimeout(function(){ shownxtpage(); }, 1000);
+// }
+
+function backward() {
+	console.log("backward moving");	
 	xhttp.onreadystatechange = function() {
 	
 		if (this.readyState == 4 && this.status == 200) {
@@ -35,9 +72,6 @@ function forward() {
 			from_img.appendChild(piece_id);
 
 			console.log("delet: "+piece_id);
-
-			// /console.log(from_img);
-			//document.getElementById(to).style.background = "blue";
 		}
 	  };
 	xhttp.open("GET", "./database/forward.php", true);
@@ -45,11 +79,41 @@ function forward() {
 	return false;
 }
 
+function forward() {
+	console.log("foward moving");	
+	xhttp.onreadystatechange = function() {
+	
+		if (this.readyState == 4 && this.status == 200) {
+			
+			var temp = this.responseText;
+			console.log("Data coming: "+temp)	
+			var from = temp.slice(0,4);
+			var to = temp.slice(4,8);
+			console.log("from : " + from + " to : " + to);
+			
+			var from_img = document.getElementById(from);
+			var to_img = document.getElementById(to);
+			var piece_id = document.getElementById(from_img.childNodes[0].id)
+		
+			console.log("to_img:" +to_img);
+			console.log(from_img);
+			console.log(piece_id);
+			
+			piece_id.remove(piece_id);
+			to_img.appendChild(piece_id);
 
+			console.log("delet: "+piece_id);
+		}
+	  };
+	xhttp.open("GET", "./database/forward.php", true);
+	xhttp.send();
+	return false;
+}
+
+//DRAG FROM AND DROP DOWN SHOWN IN DIV
 function send(dragfrom,dropto) {
 	xhttp.onreadystatechange = function() {
 	  if (this.readyState == 4 && this.status == 200) {
-		// alert(this.responseText);
 	  }
 	  else {
 		  console.log(this.statusText);
@@ -72,12 +136,6 @@ function display() {
 	
 		if (this.readyState == 4 && this.status == 200) {
 			steps.innerHTML = this.responseText;
-			// var temp = this.responseText;
-			// var from = temp.slice(4,8);
-			// var to = temp.slice(16,20);
-			// console.log("from : " + from + " to : " + to);
-			// document.getElementById(from).style.background = "red";
-			// document.getElementById(to).style.background = "blue";
 		}
 	  };
 	xhttp.open("GET", "./database/display.php", true);
@@ -86,44 +144,45 @@ function display() {
 //END OF AJAX
 
 //FUNCTION FOR REFRESHING THE PAGE
-// function indexrefresh() {
-// 	if(confirm("If you refresh of leave this page you will lose the game"))
-// 		window.location.replace("login.php");
-// }
 
-// function timeout(timeleft, flag)
-// {
-//     var minute=Math.floor(timeleft/60);
-// 	var second=timeleft%60;
-// 	// var flag = 0;
+function indexrefresh() {
+	if(confirm("If you refresh of leave this page you will lose the game"))
+		window.location.replace("login.php");
+}
 
-//     if(flag == 0)
-//     {
-//         // clearTimeout(timeout);
-// 		document.getElementById('whitetime').innerHTML= minute+":"+second;
-// 		console.log(minute + ":" + second);
-// 		setTimeout(function() {
-// 			if (timeleft > 0) {
-// 				console.log("inside settimout " + minute + ":" + second);
-// 				timeout(--timeleft, 0);
-// 			}
-// 			else
-// 				timeout(30, 1);
-// 		}, 1000);
-//     }
-//     else
-//     {
-//         document.getElementById('blacktime').innerHTML= minute+":"+second;
-// 		var blacktimeout = setTimeout(function() {
-// 			if (timeleft > 0) {
-// 				timeout(--timeleft, 1);
-// 			}
-// 			else
-// 				timeout(30, 0);
-// 		}, 1000);
-//     }
-//     // timeleft--;
-// }
+function timeout(timeleft, flag)
+{
+    var minute=Math.floor(timeleft/60);
+	var second=timeleft%60;
+	// var flag = 0;
+
+    if(flag == 0)
+    {
+        // clearTimeout(timeout);
+		document.getElementById('whitetime').innerHTML= minute+":"+second;
+		console.log(minute + ":" + second);
+		setTimeout(function() {
+			if (timeleft > 0) {
+				console.log("inside settimout " + minute + ":" + second);
+				timeout(--timeleft, 0);
+			}
+			else
+				timeout(30, 1);
+		}, 1000);
+    }
+    else
+    {
+        document.getElementById('blacktime').innerHTML= minute+":"+second;
+		var blacktimeout = setTimeout(function() {
+			if (timeleft > 0) {
+				timeout(--timeleft, 1);
+			}
+			else
+				timeout(30, 0);
+		}, 1000);
+    }
+    // timeleft--;
+}
 
 
 //SETTING ATTRIBUTE 64 BOX
@@ -147,15 +206,6 @@ function allowDrop(ev) {
   	ev.preventDefault();
     var node = ev.target.id;
 }
-
-
-// function goback(pre_dragfrom, pre_dropto) {
-
-// 	document.getElementById(pre_dragfrom).style.color = "red !important";
-// 	document.getElementById(pre_dropto).style.color = "blue !important";
-
-// }
-
 
 function drag(ev) {
 	console.log("dragged from : " + ev.target.parentNode.id);
@@ -211,9 +261,7 @@ function drop(ev) {
 		
 		var drop_to = ev.target.id;
 		
-		
 		console.log("dropp to : " + drop_to);
-	//console.log("dropp to: "+ document.getElementById(drag_from).childNodes[0].id);
 
 		var data = ev.dataTransfer.getData("text");
 		console.log("drop data " + data);
@@ -247,11 +295,9 @@ function drop(ev) {
 		dropto = drop_to;
 
 		send(dragfrom,dropto,dragele);
-		// forward();
 		random_move();
-		// timeout(30, 1);
-	
-
+		// shownxtpage();
+		timeout(30, 1);
 	}
 	else
 	{
