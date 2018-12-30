@@ -1,4 +1,5 @@
-function login(){
+function login(e){
+    e.preventDefault();
     var user = document.getElementById('user').value;
     var pswd = document.getElementById('pswd').value;
 
@@ -15,9 +16,9 @@ function login(){
 	
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == "true")
-                    window.location.replace("index.php");
+                    window.location.replace("./index.php");
                 else
-                console.log(this.responseText)
+                    document.getElementById("show_error").innerHTML = this.responseText;
             }
           };
           xhttp.open("POST", "./database/chkuser.php", true);
