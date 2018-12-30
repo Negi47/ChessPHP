@@ -169,5 +169,44 @@ function kingMoves(pos)
 			moves[j++]=id;
 		}
 	}
+
+	row=values[1];
+	column=values[3];
+	id=id="r"+(++row)+"c"+(--column);
+	if(row<=8 && column>0)
+	{
+		if(!document.getElementById(id).hasChildNodes()||(document.getElementById(id).childNodes[0].className!=document.getElementById(pos).childNodes[0].className))
+		{
+			moves[j++]=id;
+		}
+	}
+	column++;
+	id=id="r"+(row)+"c"+(++column);
+	if(row<=8 && column<=8)
+	{
+		if(!document.getElementById(id).hasChildNodes()||(document.getElementById(id).childNodes[0].className!=document.getElementById(pos).childNodes[0].className))
+		{
+			moves[j++]=id;
+		}
+	}
+	row=values[1];
+	column=values[3];
+	id=id="r"+(--row)+"c"+(--column);
+	if(row>0 && column>0)
+	{
+		if(!document.getElementById(id).hasChildNodes()||(document.getElementById(id).childNodes[0].className!=document.getElementById(pos).childNodes[0].className))
+		{
+			moves[j++]=id;
+		}
+	}
+	column++;
+	id=id="r"+(--row)+"c"+(++column);
+	if(row>0 && column<=8)
+	{
+		if(!document.getElementById(id).hasChildNodes()||(document.getElementById(id).childNodes[0].className!=document.getElementById(pos).childNodes[0].className))
+		{
+			moves[j++]=id;
+		}
+	}
 	return moves;
 }
