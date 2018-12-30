@@ -2,7 +2,7 @@
 
 
 <div class="game_sec" >
-        <button class="startgamebtn btn" > Start Game</button>
+        <button class="startgamebtn btn" onclick="startgame()" > Start Game</button>
 
         <div class="left_sec">
             <h5 style="padding-left: 12%;">Users List</h5>
