@@ -5,6 +5,10 @@ var black=16,white=16 ;
 var validMoves=[];
 var dragfrom, dropto, dragele;
 var  whitetimeout, blacktimeout;
+var select=0;
+var stopfun;
+var flag = 0;
+
 
 //AJAX CODE FOR DISPLAY THE MOVES ONTO THE SAME PAGE
 var xhttp = new XMLHttpRequest();
@@ -24,36 +28,85 @@ setInterval(function() {
 	active();
 },1000);
 
-// function shownxtpage() {
-// 	xhttp.onreadystatechange = function() {
-// 		if(this.readyState == 4 && this.status == 200){
-// 			var temp =this.responseText;
-// 			console.log("data from nxt page:" +temp)
-// 			var from_nxt = temp.slice(0,4);
-// 			var to_nxt = temp.slice(4,8);
-
-// 			console.log("from_nxt: "+from_nxt);
-// 			console.log("to_nxt: "+to_nxt);
-
-// 			var from_page = document.getElementById(from_nxt);
-// 			var to_page = document.getElementById(to_nxt);
-// 			var piece_page = document.getElementById(from_page.childNodes[0].id)
-
-			
-// 			to_page.appendChild(piece_page);
-// 		}
-// 	};
-// 	xhttp.open("GET", "./database/datatransfer.php", true);
-// 	xhttp.send();
-// 	setTimeout(function(){ shownxtpage(); }, 1000);
-// }
-
-function backward() {
-	console.log("backward moving");	
+function rewind() {
+	console.log("foward moving");	
 	xhttp.onreadystatechange = function() {
 	
 		if (this.readyState == 4 && this.status == 200) {
 			
+			var temp = "";
+
+			var data = JSON.parse(this.responseText);
+			var tmpdata = data.data;
+			console.log(tmpdata);
+
+			tmpdata.forEach(element => {
+				temp += element;
+			});
+
+			console.log("Data coming: "+temp)	
+			var from = temp.slice(select,select+4);
+			var to = temp.slice(select+4,select+8);
+			select=select+8;
+			console.log("select : " + select);
+			console.log("from : " + from + " to : " + to);
+			
+			var from_img = document.getElementById(from);
+			var to_img = document.getElementById(to);
+			var piece_id = document.getElementById(from_img.childNodes[0].id);
+
+			console.log("to_img:" +to_img);
+			console.log(from_img);
+			console.log(piece_id);
+			
+			piece_id.remove(piece_id);
+			
+			
+			var fur_node = to_img.appendChild(piece_id);
+			console.log("fur_node:" +fur_node);
+			
+			var parent = document.getElementById(to_img.id);
+
+			console.log("parent moving: " +parent.id);
+			if(parent)
+			child = document.getElementById(parent.childNodes[0].id)
+			if(parent != null)
+			{
+				parent.replaceChild(fur_node,child);
+			}
+
+			console.log("delet: "+piece_id);
+		}
+	  };
+	xhttp.open("GET", "./database/rewindmove.php", true);
+	xhttp.send();
+}
+
+function rewindgame() {
+	
+	xhttp.open("GET", "./database/rewindmove.php");
+	xhttp.send();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {	
+			var data = JSON.parse(this.responseText);
+			var datacount = data.rowcount;
+			console.log("count: "+datacount);
+			var intervalID = setInterval(function () {
+				
+				if (--datacount <= -1) {
+					window.clearInterval(intervalID);
+					alert("no more rows");
+				}
+				rewind();
+			}, 1000);
+		}
+	}
+}
+
+function backward() {
+	console.log("backward moving");	
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
 			var temp = this.responseText;
 			console.log("Data coming: "+temp)	
 			var from = temp.slice(0,4);
@@ -143,62 +196,47 @@ function display() {
 }
 //END OF AJAX
 
-//FUNCTION FOR REFRESHING THE PAGE
+//FUNCTION FOR Timer
 
-function indexrefresh() {
-	if(confirm("If you refresh of leave this page you will lose the game"))
-		window.location.replace("login.php");
-}
+// function timeout(timeleft)
+// {
+//     var minute=Math.floor(timeleft/60);
+//     var second=timeleft%60;
+	
+	
+// 	if(timeleft<=0 )
+//     {
+//         document.getElementById('blacktime').innerHTML= minute+":"+second;
+//     }
+//     // timeleft--;
+//     time = setTimeout(function() {
+//         timeout(--timeleft);
+// 	}, 1000);
+	
+// }
 
-function timeout(timeleft, flag)
-{
-    var minute=Math.floor(timeleft/60);
-	var second=timeleft%60;
-	// var flag = 0;
-
-    if(flag == 0)
-    {
-        // clearTimeout(timeout);
-		document.getElementById('whitetime').innerHTML= minute+":"+second;
-		console.log(minute + ":" + second);
-		setTimeout(function() {
-			if (timeleft > 0) {
-				console.log("inside settimout " + minute + ":" + second);
-				timeout(--timeleft, 0);
-			}
-			else
-				timeout(30, 1);
-		}, 1000);
-    }
-    else
-    {
-        document.getElementById('blacktime').innerHTML= minute+":"+second;
-		var blacktimeout = setTimeout(function() {
-			if (timeleft > 0) {
-				timeout(--timeleft, 1);
-			}
-			else
-				timeout(30, 0);
-		}, 1000);
-    }
-    // timeleft--;
-}
-
+// function timestop(){
+// 	clearTimeout(time);
+// }
 
 //SETTING ATTRIBUTE 64 BOX
-console.log('working');
-for (var i=0; i<64; i++) {
 
-	document.getElementsByClassName('box')[i].setAttribute("ondragover", "allowDrop(event)");
-	document.getElementsByClassName('box')[i].setAttribute("ondrop","drop(event)");
-	
-	if(i<16)
-	{	document.getElementsByClassName('black-piece')[i].setAttribute("ondragstart","drag(event)");
-		document.getElementsByClassName('black-piece')[i].setAttribute("draggable","true");
-		document.getElementsByClassName('white-piece')[i].setAttribute("draggable","true");
-		document.getElementsByClassName('white-piece')[i].setAttribute("ondragstart","drag(event)");
+function startgame(){
+	// timeout(120);
+	for (var i=0; i<64; i++) {
+
+		document.getElementsByClassName('box')[i].setAttribute("ondragover", "allowDrop(event)");
+		document.getElementsByClassName('box')[i].setAttribute("ondrop","drop(event)");
+		
+		if(i<16)
+		{	document.getElementsByClassName('black-piece')[i].setAttribute("ondragstart","drag(event)");
+			document.getElementsByClassName('black-piece')[i].setAttribute("draggable","true");
+			document.getElementsByClassName('white-piece')[i].setAttribute("draggable","true");
+			document.getElementsByClassName('white-piece')[i].setAttribute("ondragstart","drag(event)");
+		}
 	}
 }
+
 
 random_move()
 
@@ -232,26 +270,6 @@ function drag(ev) {
 	console.log(validMoves)
 }
 
-// function timer() {
-// 	console.log("timer working")
-// 	var minute=Math.floor(timeleft/60);
-//     var second=timeleft%60;
-//     if(timeleft<=0)
-//     {
-//         clearTimeout(whitetimeout);
-//         document.getElementById('timer').innerHTML= response.Text;
-//     }
-//     else
-//     {
-// 		clearTimeout(blacktimeout)
-// 		document.getElementById('timer').innerHTML= minute+":"+second;
-//     }
-//     timeleft--;
-//     setTimeout(function() {
-//         timeout()
-//     }, 1000);
-// }
-
 function drop(ev) {
 
 	if(validMoves.includes(ev.target.id) || validMoves.includes(ev.target.parentNode.id))
@@ -259,9 +277,9 @@ function drop(ev) {
 	
 		ev.preventDefault();
 		
-		var drop_to = ev.target.id;
+		var drop_to = (ev.target.parentNode.id == "") ? ev.target.id : ev.target.parentNode.id;
 		
-		console.log("dropp to : " + drop_to);
+		console.log("dropp to : " + drop_to + " drop_to_parent : " + ev.target.parentNode.id);
 
 		var data = ev.dataTransfer.getData("text");
 		console.log("drop data " + data);
@@ -283,7 +301,16 @@ function drop(ev) {
 
 		if(further_node	!= null)
 		{
+			var cap_pawn=further_node.childNodes[0].id;
 			further_node.replaceChild(move,child_node)
+			if(cap_pawn.includes("w-ki"))
+			{
+					alert("Black Wins");
+			}	
+			else if(cap_pawn.includes("b-ki"))
+			{
+					alert("White Wins")
+			}	
 		}
 		if(turn==0)
 		{	turn=1;
@@ -296,8 +323,9 @@ function drop(ev) {
 
 		send(dragfrom,dropto,dragele);
 		random_move();
-		// shownxtpage();
-		timeout(30, 1);
+		// timestop();
+		
+
 	}
 	else
 	{
