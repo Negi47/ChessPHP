@@ -10,6 +10,18 @@ while ($row = $rslt->fetch_assoc())
 
 
 
+$uid = $_SESSION['uid'];
+$count_moves = "select *from game where uid=" . $uid;
+$gamerslt = $con->query($count_moves);
+    if($gamerslt->num_rows > 0)
+    {
+		while ($row=$gamerslt->fetch_assoc()) {
+            
+            $playedgame[] = $row['gameid'];
+           
+    }
+
+    }
 
 
 ?>
@@ -35,7 +47,19 @@ while ($row = $rslt->fetch_assoc())
             </div>
             <div id="followers" class="col s12">Test 1</div>
             <div id="followings" class="col s12">Test 2</div>
-            <div id="games" class="col s12">Test 3</div>
+            <div id="games" class="col s12">
+            
+                <ul>
+                <?php foreach ($playedgame as $game): ?>
+                    <li>
+                        <a href="index.php?gameid=<?= $game ?>">
+                            User: <?= $_SESSION['uid'] ?> and gameid: <?= $game ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            
+            </div>
             <div id="activity" class="col s12">
             
                 <ul class=" activitylist">

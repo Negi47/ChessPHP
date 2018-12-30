@@ -7,9 +7,11 @@ var dragfrom, dropto, dragele;
 var  whitetimeout, blacktimeout;
 var select=0;
 var stopfun;
-var flag = 0;
+var gameId;
 
-
+function refresh() {
+    return "Your custom message.";
+}
 //AJAX CODE FOR DISPLAY THE MOVES ONTO THE SAME PAGE
 var xhttp = new XMLHttpRequest();
 
@@ -28,7 +30,7 @@ setInterval(function() {
 	active();
 },1000);
 
-function rewind() {
+function rewind(rewindgame_id) {
 	console.log("foward moving");	
 	xhttp.onreadystatechange = function() {
 	
@@ -78,17 +80,25 @@ function rewind() {
 			console.log("delet: "+piece_id);
 		}
 	  };
-	xhttp.open("GET", "./database/rewindmove.php", true);
-	xhttp.send();
+	  xhttp.open("POST", "./database/rewindmove.php");
+	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+	  xhttp.send("rewindgame_id=" + rewindgame_id);
 }
 
-function rewindgame() {
+function rewindgame(rewindgame_id) {
+
+	console.log("rewind game id : " + rewindgame_id);
 	
-	xhttp.open("GET", "./database/rewindmove.php");
-	xhttp.send();
+	xhttp.open("POST", "./database/rewindmove.php");
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+	xhttp.send("rewindgame_id=" + rewindgame_id);
+
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {	
+			
 			var data = JSON.parse(this.responseText);
+			console.log(data);
+
 			var datacount = data.rowcount;
 			console.log("count: "+datacount);
 			var intervalID = setInterval(function () {
@@ -97,7 +107,7 @@ function rewindgame() {
 					window.clearInterval(intervalID);
 					alert("no more rows");
 				}
-				rewind();
+				rewind(rewindgame_id);
 			}, 1000);
 		}
 	}
@@ -197,32 +207,62 @@ function display() {
 //END OF AJAX
 
 //FUNCTION FOR Timer
+function timeout(timeleft)
+{
+	console.log("timer working")
+    var minute=Math.floor(timeleft/60);
+    var second=timeleft%60;
+	if(timeleft<=0 )
+	{   
+		if(turn==0)
+		{	turn++;
+			document.getElementById('whitetime').innerHTML= minute+":"+second;
+		}
+		else
+		{	turn--;
+			document.getElementById('blacktime').innerHTML= minute+":"+second;
+		}
+		timeleft=30;
+	}
+	else
+	{	if(turn==0)
+		{
+			document.getElementById('whitetime').innerHTML= minute+":"+second;
+			console.log(turn)
+		}
+		else if(turn==1)
+		{	document.getElementById('blacktime').innerHTML= minute+":"+second;
+			console.log(turn)
+		}
+	}
+    time = setTimeout(function() {
+        timeout(--timeleft);
+	}, 1000);
+	
+}
 
-// function timeout(timeleft)
-// {
-//     var minute=Math.floor(timeleft/60);
-//     var second=timeleft%60;
-	
-	
-// 	if(timeleft<=0 )
-//     {
-//         document.getElementById('blacktime').innerHTML= minute+":"+second;
-//     }
-//     // timeleft--;
-//     time = setTimeout(function() {
-//         timeout(--timeleft);
-// 	}, 1000);
-	
-// }
-
-// function timestop(){
-// 	clearTimeout(time);
-// }
+function timestop(){
+	clearTimeout(time);
+}
 
 //SETTING ATTRIBUTE 64 BOX
-
 function startgame(){
-	// timeout(120);
+
+	var gameid = Math.floor(Math.random() * 1000) + 1;
+	console.log("fisrt game: "+gameid);
+	
+	xhttp.open("POST", "createGameId.php");
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("gameid="+gameid);
+
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200)
+			gameId = this.responseText;
+	}
+
+	console.log('bitton working');
+	console.log("game id is : " + gameId);
+	random_move()
 	for (var i=0; i<64; i++) {
 
 		document.getElementsByClassName('box')[i].setAttribute("ondragover", "allowDrop(event)");
@@ -235,10 +275,8 @@ function startgame(){
 			document.getElementsByClassName('white-piece')[i].setAttribute("ondragstart","drag(event)");
 		}
 	}
+	timeout(30)
 }
-
-
-random_move()
 
 function allowDrop(ev) {
   	ev.preventDefault();
@@ -323,15 +361,15 @@ function drop(ev) {
 
 		send(dragfrom,dropto,dragele);
 		random_move();
-		// timestop();
-		
-
+		timestop();
+		timeout(30);
 	}
 	else
 	{
 		alert("play valid move" +ev.target.id);
 	}
 }
+
 function random_move()
 {	if(turn==0)
 	{	for(var i=0;i<16;i++)

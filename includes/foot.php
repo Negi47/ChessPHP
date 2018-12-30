@@ -18,11 +18,11 @@
             $('.tabs').tabs();
             
             $(".usertrigger").click(function(){
-                $("#userprofilemenu").toggleClass("closed");
+                $("#userprofilemenu").addClass("closed");
             });
             
             $(".container").click(function(){
-                $("#userprofilemenu").toggleClass("closed");
+                $("#userprofilemenu").removeClass("closed");
             });
         });
 

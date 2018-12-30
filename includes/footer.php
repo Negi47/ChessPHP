@@ -1,7 +1,4 @@
 
-
-
-    
     <script type="text/javascript" src="js/moves.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -15,12 +12,11 @@
             $('.tabs').tabs();
 
             $(".usertrigger").click(function(){
-                var menu = $(this).attr("data-target");
-                $("#"+menu).toggleClass("closed");
+                $("#userprofilemenu").addClass("closed");
             });
 
             $(".game_sec").click(function(){
-                $("#userprofilemenu").toggleClass("closed");
+                $("#userprofilemenu").removeClass("closed");
             });
         });
     </script>

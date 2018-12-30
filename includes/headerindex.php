@@ -19,7 +19,7 @@ include "./database/dataconnect.php" ?>
     <link rel="stylesheet" href="css/profile.css">
 
 </head>
-<body>
+<body onbeforeunload="return refresh()">
 
     <nav class="mynav">
         <div class="nav-wrapper">
@@ -54,7 +54,4 @@ include "./database/dataconnect.php" ?>
             <li><a href="login.php">Login</a></li>
             <li><a href="signup.php">Signup</a></li>
         <?php endif; ?>
-
-
-
     </ul> 

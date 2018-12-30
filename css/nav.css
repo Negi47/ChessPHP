@@ -7,18 +7,18 @@
 .dropdown {
     position: absolute;
     z-index: 2;
-    top: 48px;
+    top: 44px;
     right: 25px;
     background-color: #fff;
-    border: 1px solid red;
+    width: 10%;
+    border-radius: 3px 3px 3px 3px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.4196078431372549);
+    display: none;
 }
 .dropdown li.chonch {
     position: absolute;
     border-top: 10px solid white;
-    /* border-bottom: 10px solid white; */
     border-left: 10px solid white;
-    /* border-right: 10px solid white; */
     height: 10px;
     width: 10px;
     top: -5px;
@@ -44,7 +44,7 @@
 }
 
 .closed {
-    display: none;
+    display: block !important;
 }
 
 /* body css */

@@ -18,13 +18,10 @@ require "dataconnect.php";
 			$con->query("update login set lastlogin='" . $user['userlog']. "' where uid='" . $_SESSION['uid'] . "'");
 		}
 
-		// $_SESSION['username'] = $user['username'];
-		// $_SESSION['uid'] = $user['uid'];
-
 		$update_data = "update login set active='active' where uid='" . $_SESSION['uid'] . "'";
 		$con->query($update_data);
 
-		
+		setcookie("username", "some value");
 		echo "true";
 	}
 	else

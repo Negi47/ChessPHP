@@ -1,4 +1,6 @@
-<?php include "includes/header.php" ?>
+<?php include "includes/headerindex.php" 
+// $b = (string)$_SESSION['uid'];
+?>
 
 
 <div class="game_sec" >
@@ -6,6 +8,13 @@
 
         <div class="left_sec">
             <h5 style="padding-left: 12%;">Users List</h5>
+            <?php 
+                if(isset($_COOKIE['userid']))
+                    // echo $_COOKIE['userid'];
+
+                setcookie("userid", (string)$_SESSION['uid'],time() + (86400 * 30));
+                setcookie("username", $_SESSION['username'],time() + (86400 * 30));
+            ?>
             <hr style="border: 1px solid lightgrey;">
             <ul id="usrdisplay"></ul>
         
@@ -111,12 +120,24 @@
                     <h5>User 1</h5>
                     <hr style="margin:0">
                     <div class="stepsControlBtns">
-                        <button type="button" value="backward" onclick="return backward()">
+                        <button type="button" value="backward" onclick="return forward()">
                             <i class="material-icons">skip_previous</i>
                         </button>
-                        <button type="button" value="forward" onclick="return forward()">
+                        <button type="button" value="forward" onclick="return backward()">
                             <i class="material-icons">skip_next</i>
                         </button>
+                        
+                        <?php if (isset($_GET['gameid'])): ?>
+
+                        <button type="button" onclick="return rewind()">
+                            rewind
+                        </button>
+                        <button type="button" value="forward" onclick="return rewindgame(<?= $_GET['gameid'] ?>)">
+                            rewind game
+                        </button>
+
+                        <?php endif; ?>
+
                     </div>
                     <hr style="margin:0">
                     <div class="steps" id="stepsshow">
