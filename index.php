@@ -1,26 +1,28 @@
-<?php include "includes/header.php" ?>
+
+<?php 
+session_start();
+
+if (!isset($_SESSION['username']) && !isset($_SESSION['uid']))
+    exit(header("location: login.php"));
+
+
+include "includes/header.php" 
+
+
+?>
 
 <div class="game_sec" >
         <button class="startgamebtn btn" onclick="startgame(showIdx)" > Start Game</button>
 
         <div class="left_sec">
             <h5 style="padding-left: 12%;">Users List</h5>
-            <?php 
-                if(isset($_COOKIE['userid']))
-                    // echo $_COOKIE['userid'];
-
-                setcookie("userid", (string)$_SESSION['uid'],time() + (86400 * 30));
-                setcookie("username", $_SESSION['username'],time() + (86400 * 30));
-            ?>
             <hr style="border: 1px solid lightgrey;">
             <ul id="usrdisplay"></ul>
         
         </div>
     
         <div class="mid_sec">
-        <span>Game ID - 
-        <span id="gameidx">2323</span>
-        </span>
+        
         <div class="chessboard">
 
             <div class="white box" id="r8c1"><img id="b-r1" class="black-piece" src="Images/b-rook.png"></div>
@@ -109,10 +111,13 @@
 
         <div class="right_sec">
             <div class="stepsbox">
+                <span style="margin-bottom: 100px;">Game ID - 
+                <span id="gameidx"></span>
+                </span>
                 <div style="margin-bottom: 50px;">
                     <form method="post" id="gameidform">
-                        <input type="text" palceholder="Enter Game ID"> 
-                        <button type="submit">Sub</button>
+                        <input type="text" placeholder="Enter Game ID" style="border: 1px solid grey; height: 2em; width:45%"> 
+                        <button type="submit" style="height:2em;">Sub</button>
                     </form>
                 </div>
               
@@ -120,10 +125,10 @@
                 <div class="stepsContainer" >
                     
                     <div class="stepsControlBtns">
-                        <button type="button" value="backward" onclick="return forward()">
+                        <button type="button" style="display:none;" value="backward" id="skip_prev_btns" onclick="return forward()">
                             <i class="material-icons">skip_previous</i>
                         </button>
-                        <button type="button" value="forward" onclick="return backward()">
+                        <button type="button" style="display:none;" value="forward" id="skip_next_btns" onclick="return backward()">
                             <i class="material-icons">skip_next</i>
                         </button>
                         
@@ -182,7 +187,7 @@
                     console.log("AllidMoves")
                     $.post("./database/allidmoves.php", {gameid: gameId})
                     .always(function(d){
-                        // console.log(d);
+                        console.log("came inside d:"+d);
                         d = JSON.parse(d);
                         // console.log(d.data)
                         if(d.data.length%2)
@@ -210,9 +215,6 @@
                
                 
             })
-            
-            
-
 
             function theAmazingMover(from, to){      
                 console.log(from)

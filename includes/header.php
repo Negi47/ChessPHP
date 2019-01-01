@@ -1,6 +1,4 @@
-<?php 
-session_start();
-include "./database/dataconnect.php" ?>
+<?php include "./database/dataconnect.php" ?>
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +33,7 @@ include "./database/dataconnect.php" ?>
 
                 <li style="height: 64px;" class="valign-wrapper">
                     <div class="usertrigger" data-target='userprofilemenu'>
-                        <img src="Images/board-background.png" alt="">
+                        <img src="Images/Batman2.png" alt="" style="width:40px;height:40px;">
                     </div>
                 </li>
 

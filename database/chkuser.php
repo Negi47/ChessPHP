@@ -14,6 +14,9 @@ require "dataconnect.php";
 		while($user = $search_result->fetch_assoc()) {
 			$_SESSION['username'] = $user['username'];
 			$_SESSION['uid'] = $user['uid'];
+
+			setcookie("username", $_SESSION['username'], time() + (86400 * 30), "/chessphp");
+			setcookie("userid", $_SESSION['uid'], time() + (86400 * 30), "/chessphp");
 			
 			
 			$con->query("update login set lastlogin='" . $user['userlog']. "' where uid='" . $_SESSION['uid'] . "'");
@@ -22,7 +25,7 @@ require "dataconnect.php";
 		$update_data = "update login set active='active' where uid='" . $_SESSION['uid'] . "'";
 		$con->query($update_data);
 
-		setcookie("username", "some value");
+		// setcookie("username", "some value");
 		echo "true";
 	}
 	else

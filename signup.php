@@ -1,5 +1,9 @@
 <?php 
+session_start();
 
+if (!isset($_SESSION['username']) && !isset($_SESSION['uid']))
+    exit(header("location: login.php"));
+    
 include "includes/header.php";
 
 if (isset($_POST['submit'])) {

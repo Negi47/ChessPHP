@@ -32,13 +32,13 @@
     font-family: 'Courier New', Courier, monospace;
     color: #707070;
 }
-.loginform > input[type=text]{
+.loginform > input[type=text], .loginform > input[type=password]{
     border: 0.8px solid #707070;
     border-radius: 4px 4px 4px 4px;
     box-sizing: border-box;
     height: 40px;
 }
-.loginform > input[type=text], .loginform > .log_text {
+.loginform > input[type=text], .loginform > .log_text, .loginform > input[type=password] {
     color: #707070;
     align-content: center;
     font-family: sans-serif;

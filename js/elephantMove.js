@@ -113,7 +113,7 @@ function pawnMove(pos)
 		row--;
 		id="r"+(row)+"c"+(++column);
 		console.log(id)
-		if(document.getElementById(id).hasChildNodes())
+		if(id<=8 && document.getElementById(id).hasChildNodes())
 		{	if(document.getElementById(id).childNodes[0].className=="white-piece")
 			{	moves[j++]=id;
 			}

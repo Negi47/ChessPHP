@@ -1,5 +1,7 @@
-<?php include "includes/header.php" ?>
-<?php 
+<?php
+ session_start();
+ include "includes/header.php";
+
 if (isset($_COOKIE['userid']) && isset($_COOKIE['username'])) {
     $_SESSION['username'] = $_COOKIE['username'];
     $_SESSION['uid'] = (int)$_COOKIE['userid'];
@@ -19,7 +21,7 @@ if (isset($_COOKIE['userid']) && isset($_COOKIE['username'])) {
             <input type="text" name="username" id="user">
 
             <label class="log_text">password</label>
-            <input type="text" name="password" id="pswd">
+            <input type="password" name="password" id="pswd">
             <hr>
             <!-- <input type="submit" name="submit" value="Sign in"><i class="material-icons"></i> -->
             <button type="submit" name="submit" onclick="login(event)" class="btn signup_btn"><i class="material-icons left">input</i>Submit</button>
