@@ -1,7 +1,7 @@
 <?php include "includes/header.php" ?>
 
 <div class="game_sec" >
-        <button class="startgamebtn btn" onclick="startgame(showIdx)" > Start Game</button>
+        <button class="startgamebtn btn" onclick="startgame()" > Start Game</button>
 
         <div class="left_sec">
             <h5 style="padding-left: 12%;">Users List</h5>
@@ -18,9 +18,7 @@
         </div>
     
         <div class="mid_sec">
-        <span>Game ID - 
-        <span id="gameidx">2323</span>
-        </span>
+        
         <div class="chessboard">
 
             <div class="white box" id="r8c1"><img id="b-r1" class="black-piece" src="Images/b-rook.png"></div>
@@ -94,12 +92,12 @@
 
             <!-- 8th row !-->
             <div class="black box" id="r1c1"><img id="w-r1" class="white-piece" src="Images/w-rook.png"></div>
-            <div class="white box" id="r1c2"><img id="w-b1" class="white-piece" src="Images/w-knight.png"></div>
-            <div class="black box" id="r1c3"><img id="w-k1" class="white-piece" src="Images/w-bishop.png"></div>
+            <div class="white box" id="r1c2"><img id="w-b1" class="white-piece" src="Images/w-bishop.png"></div>
+            <div class="black box" id="r1c3"><img id="w-k1" class="white-piece" src="Images/w-knight.png"></div>
             <div class="white box" id="r1c4"><img id="w-q1" class="white-piece" src="Images/w-queen.png"></div>
             <div class="black box" id="r1c5"><img id="w-ki" class="white-piece" src="Images/w-king.png"></div>
-            <div class="white box" id="r1c6"><img id="w-k2" class="white-piece" src="Images/w-bishop.png"></div>
-            <div class="black box" id="r1c7"><img id="w-b2" class="white-piece" src="Images/w-knight.png"></div>
+            <div class="white box" id="r1c6"><img id="w-k2" class="white-piece" src="Images/w-knight.png"></div>
+            <div class="black box" id="r1c7"><img id="w-b2" class="white-piece" src="Images/w-bishop.png"></div>
             <div class="white box" id="r1c8"><img id="w-r2" class="white-piece" src="Images/w-rook.png"></div>
 
         </div>
@@ -108,14 +106,11 @@
         <!-- .left_sec -->
 
         <div class="right_sec">
+
             <div class="stepsbox">
-                <div style="margin-bottom: 50px;">
-                    <form method="post" id="gameidform">
-                        <input type="text" palceholder="Enter Game ID"> 
-                        <button type="submit">Sub</button>
-                    </form>
+                <div class="timer">
+                    <span class="gametime" id="blacktime">00:30</span>   
                 </div>
-              
 
                 <div class="stepsContainer" >
                     
@@ -151,7 +146,9 @@
                 </div>
 
 
-              
+                <div class="timer">
+                    <span class="gametime" id="whitetime">00:30</span>
+                </div>
             </div>
             <!-- .stepsbox -->
         
@@ -160,90 +157,6 @@
 
     </div>
     <!-- .game_sec -->
-    <script>
-        // $(document).ready(()=>{
-        document.addEventListener("DOMContentLoaded", function(){
-
-            $ = jQuery;
-            showIdx = function(id){
-                
-                $("#gameidx").html(id)
-            }
-            $("form").on("submit", function(ev){
-                ev.preventDefault();
-                gameId = $("#gameidform input").val();
-                // startgame(myid,showIdx);
-                prepare_pieces();
-                // return false;
-                
-            })  
-            data = [];
-                moveInt = setInterval(function() {
-                    console.log("AllidMoves")
-                    $.post("./database/allidmoves.php", {gameid: gameId})
-                    .always(function(d){
-                        // console.log(d);
-                        d = JSON.parse(d);
-                        // console.log(d.data)
-                        if(d.data.length%2)
-                            turn = 1;
-                        else
-                            turn = 0;
-                            random_move();
-                        if(data.length != d.data.length){
-                            // strMove = curMove.dragFrom + curMove.dropto;
-                            
-                            for(i = data.length-1; i < d.data.length; i++){
-                                if(i==-1)i=0;
-                                curMove = d.data[i];  
-
-                                theAmazingMover(curMove.dragfrom, curMove.dropto)
-                            }
-                            console.log(curMove.dragfrom, curMove.dropto)
-                           
-                            // afunction("r2")
-                            // {"id":"1048","uid":"8","gameid":"24","dragfrom":"r2c6","dropto":"r4c6","dragele":"w-p6"}
-                        }
-                        data.push( curMove);
-                    })
-                }, 500);
-               
-                
-            })
-            
-            
-
-
-            function theAmazingMover(from, to){      
-                console.log(from)
-                var from_img = document.getElementById(from);
-                var to_img = document.getElementById(to);
-                console.log(from_img, to_img)
-                var piece_id = document.getElementById(from_img.childNodes[0].id);
-
-                console.log("to_img:" +to_img);
-                console.log(from_img);
-                console.log(piece_id);
-                
-                piece_id.remove(piece_id);
-                
-                
-                var fur_node = to_img.appendChild(piece_id);
-                console.log("fur_node:" +fur_node);
-                
-                var parent = document.getElementById(to_img.id);
-
-                console.log("parent moving: " +parent.id);
-                if(parent)
-                child = document.getElementById(parent.childNodes[0].id)
-                if(parent != null)
-                {
-                    parent.replaceChild(fur_node,child);
-                }
-
-                console.log("delet: "+piece_id);
-            }
-            </script>
 
 
 

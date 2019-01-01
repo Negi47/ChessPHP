@@ -7,6 +7,9 @@
     <script type="text/javascript" src="js/elephantMove.js"></script>
 
     <script>
+
+
+        
         $(document).ready(function() {
             // $('.dropdown-trigger').dropdown();
             $('.tabs').tabs();

@@ -39,11 +39,11 @@ if (isset($_POST['submit'])) {
 <div class="signup">
     <div class="divsignupleft">
         <form action="" method ="POST" class="signupform" >
-
             <div style="display:flex; justify-content:space-between; margin-bottom: 15px;">
-                <span>Register</span>
-                <button type="submit" class="btn register_btn"><i class="material-icons left">input</i> Register </button>
+                <span >Register</span>
+                <a href="login.php"><button type="button" class="btn register_btn"><i class="material-icons left">input</i> Login </button></a>
             </div>
+
 
             <?php 
                 // if (isset($all))               {

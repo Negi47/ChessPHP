@@ -7,9 +7,6 @@ $rslt = $con->query($show_moves);
     if($rslt->num_rows > 0)
     {
 		while ($row=$rslt->fetch_assoc()) {
-            // printf("%s \n",$ob['modelno']);
-            // $data[] = $row;
-            // echo "<table>";
             echo "<tr>";
             echo "<td>";
             echo "" . $row['dragfrom'];
@@ -20,12 +17,9 @@ $rslt = $con->query($show_moves);
             echo "<td>";
             echo "" . $row['dragele'];
             echo "  </td>";
-            echo "</tr>";
-            // echo "</table>";
+            echo "</tr>";       
     }
-    
-    // echo json_encode($data);
-    }
+}
 
 
 ?>

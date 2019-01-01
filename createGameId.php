@@ -7,7 +7,7 @@ if (isset($_POST['gameid'])) {
     $gameid=$_POST['gameid'];
     $uid = $_SESSION['uid'];
 
-    $_SESSION['gameId'] = $gameid
+    $_SESSION['gameId'] = $gameid;
 
     $con->query("insert into game(gameid, uid) values('$gameid', '$uid')");
     

@@ -15,6 +15,7 @@ require "dataconnect.php";
 			$_SESSION['username'] = $user['username'];
 			$_SESSION['uid'] = $user['uid'];
 			
+			
 			$con->query("update login set lastlogin='" . $user['userlog']. "' where uid='" . $_SESSION['uid'] . "'");
 		}
 

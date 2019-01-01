@@ -29,7 +29,7 @@ include "./database/dataconnect.php" ?>
                 
                 <?php if (!isset($_SESSION['username'])): ?>
 
-                <li><a href="signup.php">Sign In</a></li>
+                <li><a href="login.php">Sign In</a></li>
 
                 <?php else: ?>
 
