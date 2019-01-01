@@ -211,7 +211,10 @@ function display() {
 //SETTING ATTRIBUTE 64 BOX
 function startgame(show_my_id){
 
+	var gameid = Math.floor(Math.random() * 1000) + 1;
+	console.log("game is working")
 	console.log("fisrt game: "+gameid);
+	
 	
 	xhttp.open("POST", "createGameId.php");
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -222,10 +225,8 @@ function startgame(show_my_id){
 			gameId = this.responseText;
 			show_my_id(gameId);
 	}
-
 	console.log("game id is : " + gameId);
 	prepare_pieces();
-	
 }
 
 function prepare_pieces(){
