@@ -211,6 +211,9 @@ function display() {
 //SETTING ATTRIBUTE 64 BOX
 function startgame(show_my_id){
 
+	document.getElementById('skip_prev_btns').style.display = "block";
+	document.getElementById('skip_next_btns').style.display = "block";
+
 	var gameid = Math.floor(Math.random() * 1000) + 1;
 	console.log("game is working")
 	console.log("fisrt game: "+gameid);
