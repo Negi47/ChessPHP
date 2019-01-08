@@ -16,7 +16,7 @@ function login(e){
 	
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == "true")
-                    window.location.replace("./index.php");
+                    window.location.replace("./play.php");
                 else
                     document.getElementById("show_error").innerHTML = this.responseText;
             }

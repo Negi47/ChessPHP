@@ -11,8 +11,8 @@
 
 <body style="background-image:url(Images/background.jpg)">
 
-    <div style="position:absolute; height: 100%; width: 100%;" onclick="gotopage()">
-    <h5 class="homeTag">Tactical</h5>
+    <div style="position:absolute; height: 100%; width: 100%;" onclick="gotopage()"><br>
+    <h5 class="homeTag" style="font-size: 70px; margin-top:20%;">Tactical</h5>
     </div>
 
     <script>

@@ -14,10 +14,10 @@ if (isset($_COOKIE['userid']) && isset($_COOKIE['username'])) {
 <div class="login">
     <div class="divloginleft">
         <form action="" method ="POST" class="loginform" >
-            <p class="log_text2">Sign In</p>
+            <p class="log_text2" style="font-size:35px; font-weight: 500px; margin:auto; color: grey;">Sign In</p>
             <div id="show_error"></div>
 
-            <label class="log_text">Username or email</label>
+            <label class="log_text">Username</label>
             <input type="text" name="username" id="user">
 
             <label class="log_text">password</label>
@@ -29,7 +29,7 @@ if (isset($_COOKIE['userid']) && isset($_COOKIE['username'])) {
     </div>
     
     <div class="divloginright">
-        <p>New to Game</p>
+        <p style="font-size:20px; margin: auto; color: grey;" >New to Game</p>
         <a href="signup.php">
         <button type="submit" class="btn register_btn"><i class="material-icons left">input</i> Register </button>
         </a>

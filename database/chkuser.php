@@ -30,7 +30,7 @@ require "dataconnect.php";
 	}
 	else
 	{
-		echo 'User name does not exist';
+		echo 'Incorrect Credentials';
 	}	
 
 		

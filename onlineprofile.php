@@ -6,7 +6,7 @@ require "database/dataconnect.php";
 if (!isset($_SESSION['username']) && !isset($_SESSION['uid']))
 exit(header("location: login.php"));
 
-require "includes/header.php";
+require "includes/onlineheader.php";
 
 $rslt = $con->query("select lastlogin from login where uid=" . $_SESSION['uid']);
 while ($row = $rslt->fetch_assoc())
@@ -54,7 +54,7 @@ $gamerslt = $con->query($count_moves);
                 <ul>
                 <?php foreach ($playedgame as $game): ?>
                     <li>
-                        <a href="index.php?gameid=<?= $game ?>">
+                        <a href="copyindex.php?gameid=<?= $game ?>">
                             User: <?= $_SESSION['uid'] ?> and gameid: <?= $game ?>
                         </a>
                     </li>

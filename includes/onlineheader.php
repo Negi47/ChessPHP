@@ -44,7 +44,7 @@
     <ul id='userprofilemenu' class='dropdown'>
         <li class="chonch"></li>
         <?php if(isset($_SESSION['username'])): ?>
-            <li><a href="profile.php"> <?= $_SESSION['username'] ?> </a></li>
+            <li><a href="onlineprofile.php"> <?= $_SESSION['username'] ?> </a></li>
             <hr>
             <li><a href="logout.php">Logout</a></li>                        
         <?php else: ?>

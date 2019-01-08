@@ -9,9 +9,7 @@ var select=0;
 var stopfun;
 var gameId;
 
-function refresh() {
-    return "Your custom message.";
-}
+
 //AJAX CODE FOR DISPLAY THE MOVES ONTO THE SAME PAGE
 var xhttp = new XMLHttpRequest();
 
@@ -32,14 +30,17 @@ setInterval(function() {
 
 function rewind(rewindgame_id) {
 	console.log("foward moving");	
+	var steps = document.getElementById("stepstable");
 	xhttp.onreadystatechange = function() {
 	
 		if (this.readyState == 4 && this.status == 200) {
 			
 			var temp = "";
-
+			
 			var data = JSON.parse(this.responseText);
 			var tmpdata = data.data;
+			
+
 			console.log(tmpdata);
 
 			tmpdata.forEach(element => {
@@ -52,7 +53,7 @@ function rewind(rewindgame_id) {
 			select=select+8;
 			console.log("select : " + select);
 			console.log("from : " + from + " to : " + to);
-			
+
 			var from_img = document.getElementById(from);
 			var to_img = document.getElementById(to);
 			var piece_id = document.getElementById(from_img.childNodes[0].id);
@@ -86,7 +87,7 @@ function rewind(rewindgame_id) {
 }
 
 function rewindgame(rewindgame_id) {
-
+	console.log("came inside rewind function")
 	console.log("rewind game id : " + rewindgame_id);
 	
 	xhttp.open("POST", "./database/rewindmove.php");
@@ -113,65 +114,68 @@ function rewindgame(rewindgame_id) {
 	}
 }
 
-function backward() {
-	console.log("backward moving");	
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var temp = this.responseText;
-			console.log("Data coming: "+temp)	
-			var from = temp.slice(0,4);
-			var to = temp.slice(4,8);
-			console.log("from : " + from + " to : " + to);
+// function backward() {
+// 	console.log("backward moving");	
+// 	xhttp.onreadystatechange = function() {
+// 		if (this.readyState == 4 && this.status == 200) {
+// 			var temp = this.responseText;
+// 			console.log("Data coming: "+temp)	
+// 			var from = temp.slice(0,4);
+// 			var to = temp.slice(4,8);
+// 			console.log("from : " + from + " to : " + to);
 			
-			var to_img = document.getElementById(to);
-			var from_img = document.getElementById(from);
-			var piece_id = document.getElementById(to_img.childNodes[0].id)
+// 			var to_img = document.getElementById(to);
+// 			var from_img = document.getElementById(from);
+// 			var piece_id = document.getElementById(to_img.childNodes[0].id)
 		
-			console.log("to_img:" +to_img);
-			console.log(from_img);
-			console.log(piece_id);
+// 			console.log("to_img:" +to_img);
+// 			console.log(from_img);
+// 			console.log(piece_id);
 			
-			piece_id.remove(piece_id);
-			from_img.appendChild(piece_id);
+// 			piece_id.remove(piece_id);
+// 			from_img.appendChild(piece_id);
 
-			console.log("delet: "+piece_id);
-		}
-	  };
-	xhttp.open("GET", "./database/forward.php", true);
-	xhttp.send();
-	return false;
-}
-
-function forward() {
-	console.log("foward moving");	
-	xhttp.onreadystatechange = function() {
+// 			console.log("delet: "+piece_id);
+// 		}
+// 	  };
+// 	xhttp.open("GET", "./database/forward.php", true);
+// 	xhttp.send();
 	
-		if (this.readyState == 4 && this.status == 200) {
-			
-			var temp = this.responseText;
-			console.log("Data coming: "+temp)	
-			var from = temp.slice(0,4);
-			var to = temp.slice(4,8);
-			console.log("from : " + from + " to : " + to);
-			
-			var from_img = document.getElementById(from);
-			var to_img = document.getElementById(to);
-			var piece_id = document.getElementById(from_img.childNodes[0].id)
-		
-			console.log("to_img:" +to_img);
-			console.log(from_img);
-			console.log(piece_id);
-			
-			piece_id.remove(piece_id);
-			to_img.appendChild(piece_id);
+// }
+// setInterval(function() {
+// 	forward();
+// },890000000000);
 
-			console.log("delet: "+piece_id);
-		}
-	  };
-	xhttp.open("GET", "./database/forward.php", true);
-	xhttp.send();
-	return false;
-}
+// function forward() {
+// 	console.log("foward moving");	
+// 	xhttp.onreadystatechange = function() {
+	
+// 		if (this.readyState == 4 && this.status == 200) {
+			
+// 			var temp = this.responseText;
+// 			console.log("Data coming: "+temp)	
+// 			var from = temp.slice(0,4);
+// 			var to = temp.slice(4,8);
+// 			console.log("from : " + from + " to : " + to);
+			
+// 			var from_img = document.getElementById(from);
+// 			var to_img = document.getElementById(to);
+// 			var piece_id = document.getElementById(from_img.childNodes[0].id)
+		
+// 			console.log("to_img:" +to_img);
+// 			console.log(from_img);
+// 			console.log(piece_id);
+			
+// 			piece_id.remove(piece_id);
+// 			to_img.appendChild(piece_id);
+
+// 			console.log("delet: "+piece_id);
+// 		}
+// 	  };
+// 	xhttp.open("GET", "./database/forward.php", true);
+// 	xhttp.send();
+	
+// }
 
 //DRAG FROM AND DROP DOWN SHOWN IN DIV
 function send(dragfrom,dropto) {
@@ -206,50 +210,17 @@ function display() {
 }
 //END OF AJAX
 
-//FUNCTION FOR Timer
-// function timeout(timeleft)
-// {
-// 	console.log("timer working")
-//     var minute=Math.floor(timeleft/60);
-//     var second=timeleft%60;
-// 	if(timeleft<=0 )
-// 	{   
-// 		if(turn==0)
-// 		{	turn++;
-// 			document.getElementById('whitetime').innerHTML= minute+":"+second;
-// 		}
-// 		else
-// 		{	turn--;
-// 			document.getElementById('blacktime').innerHTML= minute+":"+second;
-// 		}
-// 		timeleft=30;
-// 	}
-// 	else
-// 	{	if(turn==0)
-// 		{
-// 			document.getElementById('whitetime').innerHTML= minute+":"+second;
-// 			console.log(turn)
-// 		}
-// 		else if(turn==1)
-// 		{	document.getElementById('blacktime').innerHTML= minute+":"+second;
-// 			console.log(turn)
-// 		}
-// 	}
-//     time = setTimeout(function() {
-//         timeout(--timeleft);
-// 	}, 1000);
-	
-// }
-
-// function timestop(){
-// 	clearTimeout(time);
-// }
 
 //SETTING ATTRIBUTE 64 BOX
-function startgame(){
+function startgame(show_my_id){
+
+	//document.getElementById('skip_prev_btns').style.display = "block";
+	//document.getElementById('skip_next_btns').style.display = "block";
 
 	var gameid = Math.floor(Math.random() * 1000) + 1;
+	console.log("game is working")
 	console.log("fisrt game: "+gameid);
+	
 	
 	xhttp.open("POST", "createGameId.php");
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -258,10 +229,13 @@ function startgame(){
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200)
 			gameId = this.responseText;
+			show_my_id(gameId);
 	}
-
-	console.log('bitton working');
 	console.log("game id is : " + gameId);
+	prepare_pieces();
+}
+
+function prepare_pieces(){
 	random_move()
 	for (var i=0; i<64; i++) {
 
@@ -275,9 +249,8 @@ function startgame(){
 			document.getElementsByClassName('white-piece')[i].setAttribute("ondragstart","drag(event)");
 		}
 	}
-	// timeout(30)
+	timeout(30)
 }
-
 function allowDrop(ev) {
   	ev.preventDefault();
     var node = ev.target.id;
@@ -361,9 +334,7 @@ function drop(ev) {
 
 		send(dragfrom,dropto,dragele);
 		random_move();
-		// timestop();
-		// timeout(30);
-	}
+}
 	else
 	{
 		alert("play valid move" +ev.target.id);

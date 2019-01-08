@@ -1,8 +1,8 @@
 <?php 
 session_start();
 
-if (!isset($_SESSION['username']) && !isset($_SESSION['uid']))
-    exit(header("location: login.php"));
+// if (!isset($_SESSION['username']) && !isset($_SESSION['uid']))
+//     exit(header("location: login.php"));
     
 include "includes/header.php";
 
@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
     <div class="divsignupleft">
         <form action="" method ="POST" class="signupform" >
             <div style="display:flex; justify-content:space-between; margin-bottom: 15px;">
-                <span >Register</span>
+                <span style="font-size:35px;  color: grey;" >Register</span>
                 <a href="login.php"><button type="button" class="btn register_btn"><i class="material-icons left">input</i> Login </button></a>
             </div>
 
@@ -61,14 +61,14 @@ if (isset($_POST['submit'])) {
                 // else if()
             ?>
 
-            <label class="signup_text">Username</label>
+            <label class="signup_text" style="font-size:18px;">Username</label>
             <p style="margin:0;"><small id="usernameError"></small></p>
             <input type="text" name="username" id="user" onkeyup="checkUsername()">
 
-            <label class="signup_text">password</label>
+            <label class="signup_text" style="font-size:18px;">password</label>
             <input type="text" name="password" id="pswd">
 
-            <label class="signup_text">Email</label>
+            <label class="signup_text" style="font-size:18px;">Email</label>
             <p style="margin:0;"><small id="emailError"></small></p>
             <input type="text" name="email" id="email" onkeyup="checkEmail()">
             <hr>

@@ -6,13 +6,13 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['uid']))
     exit(header("location: login.php"));
 
 
-include "includes/header.php" 
+include "includes/onlineheader.php" 
 
 
 ?>
 
 <div class="game_sec" >
-        <button class="startgamebtn btn" onclick="startgame()" > Start Game</button>
+        <button class="startgamebtn btn" onclick="startgame(showIdx)" > Start Game</button>
 
         <div class="left_sec">
             <h5 style="padding-left: 12%;">Users List</h5>
@@ -111,7 +111,7 @@ include "includes/header.php"
 
         <div class="right_sec">
             <div class="stepsbox">
-                <!-- <span style="margin-bottom: 100px;">Game ID - 
+                <span style="margin-bottom: 100px;">Game ID - 
                 <span id="gameidx"></span>
                 </span>
                 <div style="margin-bottom: 50px;">
@@ -119,22 +119,22 @@ include "includes/header.php"
                         <input type="text" placeholder="Enter Game ID" style="border: 1px solid grey; height: 2em; width:45%"> 
                         <button type="submit" style="height:2em;">Sub</button>
                     </form>
-                </div> -->
+                </div>
               
 
                 <div class="stepsContainer" >
                     
                     <div class="stepsControlBtns">
-                        <button type="button"  value="backward" id="skip_prev_btns" onclick="return forward()">
+                        <!-- <button type="button"  value="backward" id="skip_prev_btns" onclick="return forward()">
                             <i class="material-icons">skip_previous</i>
                         </button>
                         <button type="button"  value="forward" id="skip_next_btns" onclick="return backward()">
                             <i class="material-icons">skip_next</i>
-                        </button>
+                        </button> -->
                         
                         <?php if (isset($_GET['gameid'])): ?>
 
-                        <button type="button" value="forward" onclick="return rewindgame(<?= $_GET['gameid'] ?>)">
+                        <button type="button" value="forward" class="btn" onclick="return rewindgame(<?= $_GET['gameid'] ?>)">
                             Replay Game
                         </button>
 
@@ -164,7 +164,7 @@ include "includes/header.php"
         <!-- .right_sec -->
 
     </div>
-    <!-- .game_sec
+    <!-- .game_sec -->
     <script>
         // $(document).ready(()=>{
         document.addEventListener("DOMContentLoaded", function(){
@@ -245,12 +245,12 @@ include "includes/header.php"
 
                 console.log("delet: "+piece_id);
             }
-            </script> -->
+            </script>
 
 
 
 
-<?php include "includes/footer.php"
+<?php include "includes/onlinefooter.php"
 
 
 ?>
